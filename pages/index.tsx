@@ -14,7 +14,7 @@ export async function getStaticProps() {
 
   return {
     props: {
-      comps: comps.slice(0, 4),
+      comps: comps.slice(0, 4).reverse(),
     },
     revalidate: 10,
   };
