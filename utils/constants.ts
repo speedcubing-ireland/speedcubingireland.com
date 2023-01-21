@@ -1,0 +1,1 @@
+export const CURRENT_COMP_REVALIDATE_TIME = 60 * 60 * 3;

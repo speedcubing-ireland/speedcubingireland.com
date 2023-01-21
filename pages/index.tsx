@@ -2,19 +2,14 @@
 import { InferGetStaticPropsType } from 'next';
 import Hero from '../components/home/Hero';
 import Newsletter from '../components/home/Newsletter';
-import { FormatDate, SearchCompetitions } from '../utils/wca-api';
+import { getCompsFromNow } from '../utils/wca-api';
 import Layout from '../components/layout/Layout';
 
 export async function getStaticProps() {
-  const comps = await SearchCompetitions({
-    country_iso2: 'IE',
-    start: FormatDate(new Date()),
-    sort: ['-start_date'].join(','),
-  });
-
+  const comps = await getCompsFromNow();
   return {
     props: {
-      comps: comps.slice(0, 4).reverse(),
+      comps: comps.reverse().slice(0, 4),
     },
     revalidate: 10,
   };

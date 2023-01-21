@@ -1,4 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
+import Link from 'next/link';
 import Logo from '../../public/speedcubing-ireland-logo.svg';
 
 function Navbar() {
@@ -11,11 +12,8 @@ function Navbar() {
       </div>
       <div className="navbar-end">
         <ul className="menu menu-horizontal px-1">
-          <li><a>Item 1</a></li>
-          <li><a>Item 2</a></li>
-        </ul>
-
-        <ul className="menu menu-horizontal px-1">
+          <li><Link href="/redirects/wca-live">WCA Live</Link></li>
+          <li><Link href="/redirects/comp-groups">Comp Groups</Link></li>
           <li><a>Item 3</a></li>
           <li><a>Item 4</a></li>
         </ul>

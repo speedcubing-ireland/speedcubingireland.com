@@ -4,7 +4,7 @@ import Navbar from './Navbar';
 
 interface LayoutProps {
   title?: string | undefined;
-  children: JSX.Element | JSX.Element[];
+  children?: JSX.Element | JSX.Element[] | undefined;
 }
 
 function Layout({ title, children }: LayoutProps) {
