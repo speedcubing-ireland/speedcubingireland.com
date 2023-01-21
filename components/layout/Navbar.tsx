@@ -62,8 +62,6 @@ function Navbar() {
             </li>
             <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
               {navbarListItems('block')}
-              <hr />
-              <li><a>Hello</a></li>
             </ul>
           </div>
           {navbarListItems('hidden lg:flex')}
