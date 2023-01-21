@@ -5,6 +5,7 @@ import Newsletter from '../components/home/Newsletter';
 import { getCompsFromNow } from '../utils/wca-api';
 import Layout from '../components/layout/Layout';
 import { CURRENT_COMP_REVALIDATE_TIME } from '../utils/constants';
+import Sponsors from '../components/home/Sponsors';
 
 export async function getStaticProps() {
   const comps = await getCompsFromNow();
@@ -22,6 +23,7 @@ export default function Home({
   return (
     <Layout>
       <Hero comps={comps} />
+      <Sponsors />
       <Newsletter />
     </Layout>
   );

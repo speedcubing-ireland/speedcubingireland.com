@@ -7,8 +7,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
 import { IRISH_COMPS_URL } from '../../utils/constants';
-import Logo from '../../public/speedcubing-ireland-logo.svg';
-import DarkLogo from '../../public/speedcubing-ireland-logo-dark.svg';
+import Logo from '../../public/logos/speedcubing-ireland-logo.svg';
+import DarkLogo from '../../public/logos/speedcubing-ireland-logo-dark.svg';
 
 function Navbar() {
   const { resolvedTheme, setTheme } = useTheme();

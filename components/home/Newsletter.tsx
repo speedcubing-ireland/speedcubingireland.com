@@ -1,6 +1,6 @@
 function Newsletter() {
   return (
-    <div className="bg-neutral text-neutral-content">
+    <div className="bg-primary text-neutral-content">
       <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center">
         <div className="lg:w-0 lg:flex-1">
           <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl" id="newsletter-headline">
