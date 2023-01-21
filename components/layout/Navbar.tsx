@@ -26,8 +26,8 @@ function Navbar() {
 
     return (
       <li className={classes}>
-        <button type="button" onClick={handleThemeChange} className="btn btn-ghost">
-          <FontAwesomeIcon icon={icon} className="text-center" />
+        <button type="button" onClick={handleThemeChange} className="btn btn-ghost text-xl btn-block">
+          <FontAwesomeIcon icon={icon} className="pt-0.5" />
         </button>
       </li>
     );
