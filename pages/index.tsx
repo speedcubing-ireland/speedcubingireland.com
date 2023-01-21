@@ -4,6 +4,7 @@ import Hero from '../components/home/Hero';
 import Newsletter from '../components/home/Newsletter';
 import { getCompsFromNow } from '../utils/wca-api';
 import Layout from '../components/layout/Layout';
+import { CURRENT_COMP_REVALIDATE_TIME } from '../utils/constants';
 
 export async function getStaticProps() {
   const comps = await getCompsFromNow();
@@ -11,7 +12,7 @@ export async function getStaticProps() {
     props: {
       comps: comps.reverse().slice(0, 4),
     },
-    revalidate: 10,
+    revalidate: CURRENT_COMP_REVALIDATE_TIME,
   };
 }
 
