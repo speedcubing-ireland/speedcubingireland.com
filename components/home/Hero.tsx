@@ -1,3 +1,5 @@
+import { faCaretRight, faTrophy } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
 import { IRISH_COMPS_URL, WCA_URL } from '../../utils/constants';
 import { Competition } from '../../utils/wca-api/types';
@@ -7,6 +9,7 @@ interface ItemProps {
   name: string
   desc: JSX.Element
   url: string
+  icon?: any
 }
 
 function CardItem({
@@ -14,12 +17,14 @@ function CardItem({
   name,
   desc,
   url,
+  icon,
 }: ItemProps) {
   return (
     <Link href={url} className="stat px-4 hover:opacity-60">
       <div className="stat-title opacity-100">{title}</div>
       <div className="stat-value text-lg">{name}</div>
       <div className="stat-desc opacity-100">{desc}</div>
+      {icon && <div className="stat-figure"><FontAwesomeIcon icon={icon} className="text-accent" /></div>}
     </Link>
   );
 }
@@ -118,6 +123,7 @@ function HeroCard({ comps }: HeroProps) {
       name={comp.name}
       desc={getCardDesc(comp)}
       url={`${WCA_URL}/competitions/${comp.id}`}
+      icon={comp.name.includes('Championship') && faTrophy}
     />
   );
 
@@ -135,14 +141,17 @@ function Hero({ comps }: HeroProps) {
     >
       <div className="hero-content flex-col lg:flex-row-reverse py-10 gap-12">
         <div className="text-center text-primary-content lg:text-left">
-          <h1 className="text-5xl font-bold">Upcoming Competitions</h1>
+          <h1 className="text-5xl font-bold gap-2">Upcoming Competitions</h1>
           <p className="py-6 text-lg text-left">
             Welcome to Speedcubing Ireland, the official WCA regional organization
             for promoting and supporting the exciting world of speedcubing in Ireland!
 
             Check out our list of upcoming competitions to get involved and join the fun!
           </p>
-          <Link className="btn" href={IRISH_COMPS_URL}>See More!</Link>
+          <Link className="btn gap-2" href={IRISH_COMPS_URL}>
+            See More!
+            <FontAwesomeIcon icon={faCaretRight} />
+          </Link>
         </div>
         <HeroCard comps={comps} />
       </div>
