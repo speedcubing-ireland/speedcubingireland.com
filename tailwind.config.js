@@ -10,6 +10,17 @@ module.exports = {
   },
   plugins: [require('daisyui')],
   daisyui: {
-    themes: ["emerald"],
+    themes: [
+      "emerald",
+      {
+        forest: {
+          ...require("daisyui/src/colors/themes")["[data-theme=forest]"],
+          "--animation-btn": "0",
+          "--animation-input": "0",
+          "--btn-focus-scale": "1",
+          "--rounded-btn": undefined,
+        }
+      }
+    ],
   },
 };

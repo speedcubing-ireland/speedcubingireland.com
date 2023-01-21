@@ -4,10 +4,37 @@ import * as FASolid from '@fortawesome/free-solid-svg-icons';
 
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useTheme } from 'next-themes';
+import { useEffect, useState } from 'react';
 import { IRISH_COMPS_URL } from '../../utils/constants';
 import Logo from '../../public/speedcubing-ireland-logo.svg';
+import DarkLogo from '../../public/speedcubing-ireland-logo-dark.svg';
 
 function Navbar() {
+  const { resolvedTheme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  const isDark = mounted && resolvedTheme === 'dark';
+
+  useEffect(() => setMounted(true), []);
+
+  const themeButton = (classes: string) => {
+    if (!mounted) return undefined;
+
+    const icon = isDark ? FASolid.faSun : FASolid.faMoon;
+    const handleThemeChange = () => setTheme(isDark ? 'light' : 'dark');
+
+    return (
+      <li className={classes}>
+        <button type="button" onClick={handleThemeChange} className="btn btn-ghost">
+          <FontAwesomeIcon icon={icon} className="text-center" />
+        </button>
+      </li>
+    );
+  };
+
+  const logo = isDark ? <DarkLogo className="h-full p-1" /> : <Logo className="h-full p-1" />;
+
   const navbarItems = [
     {
       text: 'WCA Live',
@@ -49,7 +76,7 @@ function Navbar() {
     <div className="navbar bg-base-100 font-extrabold text-xl">
       <div className="navbar-start">
         <a href="./" className="btn btn-ghost h-16">
-          <Logo className="h-full p-1" />
+          {logo}
         </a>
       </div>
       <div className="navbar-end">
@@ -62,9 +89,12 @@ function Navbar() {
             </li>
             <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
               {navbarListItems('block')}
+              <hr />
+              {themeButton('block')}
             </ul>
           </div>
           {navbarListItems('hidden lg:flex')}
+          {themeButton('hidden lg:flex')}
         </ul>
       </div>
     </div>
