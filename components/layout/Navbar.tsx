@@ -13,7 +13,7 @@ function Navbar() {
       <div className="navbar-end">
         <ul className="menu menu-horizontal px-1">
           <li><Link href="/redirects/wca-live">WCA Live</Link></li>
-          <li><Link href="/redirects/comp-groups">Comp Groups</Link></li>
+          <li><Link href="/redirects/comp-groups" replace>Comp Groups</Link></li>
           <li><a>Item 3</a></li>
           <li><a>Item 4</a></li>
         </ul>
