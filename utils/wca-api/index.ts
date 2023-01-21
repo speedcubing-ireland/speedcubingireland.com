@@ -4,7 +4,7 @@ const { WCA_API_URL } = process.env;
 
 function getCurrentDate() {
   if (process.env.NODE_ENV === 'development') {
-    return new Date('2023-01-15');
+    return new Date('2022-11-05');
   }
   return new Date();
 }
@@ -27,7 +27,7 @@ export async function searchCompetitions(options: Record<string, string>): Promi
 
 export async function getCompsFromNow(): Promise<Competition[]> {
   const comps = await searchCompetitions({
-    country_iso2: 'GB',
+    country_iso2: 'IE',
     start: formatDate(dateInDays(-4)),
     sort: ['-start_date'].join(','),
   });
