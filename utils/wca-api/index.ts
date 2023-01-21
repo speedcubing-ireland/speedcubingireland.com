@@ -3,7 +3,7 @@ import { Competition } from './types';
 
 function getCurrentDate() {
   if (process.env.NODE_ENV === 'development') {
-    return new Date('2022-11-05');
+    // return new Date('2022-11-05');
   }
   return new Date();
 }
