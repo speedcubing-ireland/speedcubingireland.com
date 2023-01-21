@@ -73,7 +73,7 @@ function getCardDesc(comp: Competition) {
   let regClass: string;
   if (now > new Date(comp.registration_close)) {
     regText = 'Registration is closed';
-    regClass = 'text-accent';
+    regClass = '';
   } else {
     // get time until registration opens like opens in 2 hours or opens in 3 weeks
     const diff = new Date(comp.registration_open).getTime() - now.getTime();
@@ -81,7 +81,7 @@ function getCardDesc(comp: Competition) {
     const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
     const minutes = Math.floor((diff / 1000 / 60) % 60);
     const seconds = Math.floor((diff / 1000) % 60);
-    regClass = 'text-secondary';
+    regClass = 'text-primary';
     if (days > 0) {
       regText = `Registration opens in ${days} days`;
     } else if (hours > 0) {
@@ -92,7 +92,6 @@ function getCardDesc(comp: Competition) {
       regText = `Registration opens in ${seconds} seconds`;
     } else {
       regText = 'Registration is now open!';
-      regClass = 'text-primary';
     }
   }
   return <span className={regClass}>{regText}</span>;
@@ -118,7 +117,7 @@ function HeroCard({ comps }: HeroProps) {
       title={getCardTitle(comp)}
       name={comp.name}
       desc={getCardDesc(comp)}
-      url={`${WCA_URL}/competitions/${comp.id}/`}
+      url={`${WCA_URL}/competitions/${comp.id}`}
     />
   );
 
