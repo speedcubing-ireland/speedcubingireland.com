@@ -1,4 +1,4 @@
-const { WCA_LIVE_API_URL } = process.env;
+import { WCA_LIVE_API_URL } from '../constants';
 
 const SEARCH_BY_NAME_QUERY = /* GraphQL */ (`
   query Competitions($filter: String!) {
@@ -20,7 +20,7 @@ export async function getWCALiveCompetitionId(name: string): Promise<string | un
     body: JSON.stringify({ query: SEARCH_BY_NAME_QUERY, variables }),
   };
 
-  const req = await fetch(WCA_LIVE_API_URL!, options);
+  const req = await fetch(WCA_LIVE_API_URL, options);
   if (!req.ok) return undefined;
 
   const res = await req.json();

@@ -1,6 +1,5 @@
+import { WCA_API_URL } from '../constants';
 import { Competition } from './types';
-
-const { WCA_API_URL } = process.env;
 
 function getCurrentDate() {
   if (process.env.NODE_ENV === 'development') {
