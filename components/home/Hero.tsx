@@ -136,7 +136,7 @@ function Hero({ comps }: HeroProps) {
       <div className="hero-content flex-col lg:flex-row-reverse py-10 gap-12">
         <div className="text-center text-primary-content lg:text-left">
           <h1 className="text-5xl font-bold">Upcoming Competitions</h1>
-          <p className="py-6 text-lg">
+          <p className="py-6 text-lg text-left">
             Welcome to Speedcubing Ireland, the official WCA regional organization
             for promoting and supporting the exciting world of speedcubing in Ireland!
 
