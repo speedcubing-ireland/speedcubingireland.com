@@ -1,18 +1,26 @@
+import Link from 'next/link';
+import { IRISH_COMPS_URL, WCA_URL } from '../../utils/constants';
 import { Competition } from '../../utils/wca-api/types';
 
 interface ItemProps {
   title: JSX.Element
   name: string
   desc: JSX.Element
+  url: string
 }
 
-function CardItem({ title, name, desc }: ItemProps) {
+function CardItem({
+  title,
+  name,
+  desc,
+  url,
+}: ItemProps) {
   return (
-    <a href="./" className="stat px-4 hover:opacity-60">
+    <Link href={url} className="stat px-4 hover:opacity-60">
       <div className="stat-title opacity-100">{title}</div>
       <div className="stat-value text-lg">{name}</div>
       <div className="stat-desc opacity-100">{desc}</div>
-    </a>
+    </Link>
   );
 }
 
@@ -98,6 +106,7 @@ function HeroCard({ comps }: HeroProps) {
           title={<span className="font-bold text-primary">No upcoming competitions</span>}
           name="Check back later!"
           desc={<span className="text-secondary">No competitions are currently scheduled</span>}
+          url={IRISH_COMPS_URL}
         />
       </Card>
     );
@@ -109,6 +118,7 @@ function HeroCard({ comps }: HeroProps) {
       title={getCardTitle(comp)}
       name={comp.name}
       desc={getCardDesc(comp)}
+      url={`${WCA_URL}/competitions/${comp.id}/`}
     />
   );
 
@@ -133,7 +143,7 @@ function Hero({ comps }: HeroProps) {
 
             Check out our list of upcoming competitions to get involved and join the fun!
           </p>
-          <button type="button" className="btn">See More!</button>
+          <Link className="btn" href={IRISH_COMPS_URL}>See More!</Link>
         </div>
         <HeroCard comps={comps} />
       </div>
