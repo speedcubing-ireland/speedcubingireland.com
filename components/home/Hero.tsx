@@ -29,7 +29,7 @@ function CardItem({
   icon,
 }: ItemProps) {
   return (
-    <Link href={url} className="stat px-4 hover:opacity-60">
+    <Link href={url} className="stat px-4 hover:bg-base-200">
       <div className="stat-title opacity-100">{title}</div>
       <div className="stat-value text-lg">{name}</div>
       <div className="stat-desc opacity-100">{desc}</div>
