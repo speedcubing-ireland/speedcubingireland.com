@@ -79,7 +79,7 @@ function Navbar() {
           {logo}
         </a>
       </div>
-      <div className="navbar-end">
+      <div className="navbar-end w-full">
         <ul className="menu menu-horizontal px-1">
           <div className="dropdown dropdown-end dropdown-hover lg:hidden">
             <li>
