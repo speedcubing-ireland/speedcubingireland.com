@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */ // daisyUI uses tabIndex
-/* eslint-disable jsx-a11y/anchor-is-valid */
-import * as FASolid from '@fortawesome/free-solid-svg-icons';
-
+import {
+  faAward, faBars, faBolt, faCircleInfo, faMessage, faMoon, faSun,
+} from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useTheme } from 'next-themes';
@@ -21,7 +21,7 @@ function Navbar() {
   const themeButton = (classes: string) => {
     if (!mounted) return undefined;
 
-    const icon = isDark ? FASolid.faSun : FASolid.faMoon;
+    const icon = isDark ? faSun : faMoon;
     const handleThemeChange = () => setTheme(isDark ? 'light' : 'dark');
 
     return (
@@ -38,27 +38,22 @@ function Navbar() {
   const navbarItems = [
     {
       text: 'WCA Live',
-      icon: FASolid.faBolt,
+      icon: faBolt,
       url: '/redirects/wca-live',
     },
     {
-      text: 'Groups',
-      icon: FASolid.faPeopleGroup,
-      url: '/redirects/comp-groups',
-    },
-    {
       text: 'Competitions',
-      icon: FASolid.faAward,
+      icon: faAward,
       url: IRISH_COMPS_URL,
     },
     {
       text: 'About',
-      icon: FASolid.faCircleInfo,
+      icon: faCircleInfo,
       url: '/',
     },
     {
       text: 'Contact',
-      icon: FASolid.faMessage,
+      icon: faMessage,
       url: '/',
     },
   ];
@@ -84,7 +79,7 @@ function Navbar() {
           <div className="dropdown dropdown-end dropdown-hover lg:hidden">
             <li>
               <label tabIndex={0}>
-                <FontAwesomeIcon icon={FASolid.faBars} />
+                <FontAwesomeIcon icon={faBars} />
               </label>
             </li>
             <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">

@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 import { InferGetStaticPropsType } from 'next';
 import Hero, { HeroComp } from '../components/home/Hero';
 import Newsletter from '../components/home/Newsletter';

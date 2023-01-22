@@ -1,7 +1,9 @@
-import { faCaretRight, faTrophy } from '@fortawesome/free-solid-svg-icons';
+import { faCaretRight, faLocationArrow, faTrophy } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
 import { IRISH_COMPS_URL, WCA_URL } from '../../utils/constants';
+
+// TODO: handle belfast comps :)
 
 export interface HeroComp {
   id: string;
@@ -46,7 +48,6 @@ function Card({ children }: { children: JSX.Element | JSX.Element[] }) {
   );
 }
 
-// TODO: handle belfast comps :)
 interface HeroProps {
   comps: HeroComp[];
 }
@@ -73,7 +74,9 @@ function getCardTitle(comp: HeroComp) {
 
   return (
     <>
-      <span className="font-bold text-primary">{comp.city.split(',').pop() ?? comp.city}</span>
+      <FontAwesomeIcon icon={faLocationArrow} className="text-primary" />
+      &nbsp;
+      <span className="font-bold text-primary">{comp.city.split(',').pop()?.trim() ?? comp.city}</span>
       &nbsp;
       {date}
     </>
