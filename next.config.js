@@ -10,6 +10,9 @@ const nextConfig = {
 
     return config;
   },
+  images: {
+    domains: ['cdn.shopify.com'],
+  }
 };
 
 module.exports = nextConfig;

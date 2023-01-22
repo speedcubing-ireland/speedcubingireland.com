@@ -1,12 +1,13 @@
 import { InferGetStaticPropsType } from 'next';
 import Hero, { HeroComp } from '../components/home/Hero';
-import Newsletter from '../components/home/Newsletter';
+import Socials from '../components/home/Socials';
 import { getCompsFromNow } from '../utils/wca-api';
 import Layout from '../components/layout/Layout';
 import { CURRENT_COMP_REVALIDATE_TIME } from '../utils/constants';
 import Sponsors from '../components/home/Sponsors';
 import Stats from '../components/home/Stats';
 import Divider from '../components/home/Divider';
+import Products from '../components/home/Products';
 
 export async function getStaticProps() {
   const comps = await getCompsFromNow();
@@ -38,7 +39,8 @@ export default function Home({
       <Stats />
       <Divider />
       <Sponsors />
-      <Newsletter />
+      <Socials />
+      <Products />
     </Layout>
   );
 }
