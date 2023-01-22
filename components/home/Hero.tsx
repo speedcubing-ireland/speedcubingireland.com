@@ -2,7 +2,16 @@ import { faCaretRight, faTrophy } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
 import { IRISH_COMPS_URL, WCA_URL } from '../../utils/constants';
-import { Competition } from '../../utils/wca-api/types';
+
+export interface HeroComp {
+  id: string;
+  name: string;
+  registration_open: string;
+  registration_close: string;
+  start_date: string;
+  end_date: string;
+  city: string;
+}
 
 interface ItemProps {
   title: JSX.Element
@@ -39,10 +48,10 @@ function Card({ children }: { children: JSX.Element | JSX.Element[] }) {
 
 // TODO: handle belfast comps :)
 interface HeroProps {
-  comps: Competition[];
+  comps: HeroComp[];
 }
 
-function getCardTitle(comp: Competition) {
+function getCardTitle(comp: HeroComp) {
   const startDate = new Date(comp.start_date);
   const endDate = new Date(comp.end_date);
 
@@ -71,7 +80,7 @@ function getCardTitle(comp: Competition) {
   );
 }
 
-function getCardDesc(comp: Competition) {
+function getCardDesc(comp: HeroComp) {
   // Current date
   const now = new Date();
   let regText: string;
@@ -116,7 +125,7 @@ function HeroCard({ comps }: HeroProps) {
     );
   }
 
-  const compStat = (comp: Competition) => (
+  const compStat = (comp: HeroComp) => (
     <CardItem
       key={comp.id}
       title={getCardTitle(comp)}
