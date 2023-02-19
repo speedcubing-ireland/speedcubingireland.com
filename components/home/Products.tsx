@@ -28,7 +28,7 @@ function ProductCard({ product, link }: { product: SimplifiedProduct, link: stri
 }
 
 function Products({ products }: { products: SimplifiedProduct[] }) {
-  if (!products) return null;
+  if (!products || products.length === 0) return null;
 
   const link = SHOPIFY_STORE_URL;
 

@@ -23,7 +23,9 @@ export function simplifyShopifyProduct(product: Product) {
 
 export const shopifyStoreURL = process.env.SHOPIFY_HOSTNAME!;
 
-export const shopify = shopifyApi({
+const invalidConfig = !process.env.SHOPIFY_API_KEY || !process.env.SHOPIFY_ADMIN_API_KEY;
+
+export const shopify = invalidConfig ? null : shopifyApi({
   apiKey: process.env.SHOPIFY_API_KEY!,
   apiSecretKey: process.env.SHOPIFY_ADMIN_API_KEY!,
   apiVersion: ApiVersion.January23,
@@ -34,4 +36,4 @@ export const shopify = shopifyApi({
   restResources,
 });
 
-export const session = shopify.session.customAppSession(shopifyStoreURL);
+export const session = shopify?.session.customAppSession(shopifyStoreURL);

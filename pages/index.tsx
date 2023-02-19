@@ -12,6 +12,7 @@ import {
   shopify,
   session,
   simplifyShopifyProduct,
+  SimplifiedProduct,
 } from '../utils/shopify';
 
 export const getStaticProps: GetStaticProps = async () => {
@@ -27,8 +28,9 @@ export const getStaticProps: GetStaticProps = async () => {
     city: comp.city,
   }));
 
-  const shopifyProducts = await shopify.rest.Product.all({ session });
-  const simplifiedProducts = shopifyProducts.map(simplifyShopifyProduct);
+  let simplifiedProducts: SimplifiedProduct[] = [];
+  const shopifyProducts = session && shopify && await shopify.rest.Product.all({ session });
+  if (shopifyProducts) simplifiedProducts = shopifyProducts.map(simplifyShopifyProduct);
 
   return {
     props: {
