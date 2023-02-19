@@ -30,7 +30,7 @@ function Stats() {
   ];
 
   return (
-    <div className="bg-base-100">
+    <div className="bg-base-200">
       <div className="columns-1 md:columns-3 text-center max-w-4xl m-auto pt-4 pb-6">
         {stats.map((stat) => (Stat(stat.title, stat.value, stat.color, stat.icon)))}
       </div>

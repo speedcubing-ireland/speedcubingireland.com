@@ -75,7 +75,7 @@ function SelfSponsor({ dark }: { dark: boolean }) {
 function Sponsors() {
   const dark = useLightDarkOption(false, true);
   return (
-    <div className="bg-base-100 hero">
+    <div className="bg-base-200 hero">
       <div className="hero-content text-center">
         <div className="this-is-here-to-make-layout-work">
           {sponsors.length > 0 && <AllSponsors dark={dark} />}
