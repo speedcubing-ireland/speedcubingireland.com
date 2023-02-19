@@ -12,7 +12,8 @@ function Socials() {
           </h2>
           <p className="mt-3 max-w-3xl text-lg leading-6">
             Stay up-to-date on the latest Speedcubing Ireland
-            competitions and news with our Facebook and Instagram pages.
+            competitions and news with our Facebook and Instagram pages,
+            or join our Discord communty!
           </p>
         </div>
         <div className="mt-8 lg:mt-0 lg:ml-8">
