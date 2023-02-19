@@ -12,7 +12,6 @@ import {
   shopify,
   session,
   simplifyShopifyProduct,
-  shopifyStoreURL,
 } from '../utils/shopify';
 
 export const getStaticProps: GetStaticProps = async () => {
@@ -35,7 +34,6 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       comps: heroComps,
       products: simplifiedProducts,
-      storeLink: shopifyStoreURL,
     },
     revalidate: CURRENT_COMP_REVALIDATE_TIME,
   };
@@ -44,7 +42,6 @@ export const getStaticProps: GetStaticProps = async () => {
 export default function Home({
   comps,
   products,
-  storeLink,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <Layout home>
@@ -53,7 +50,7 @@ export default function Home({
       <Divider />
       <Sponsors />
       <Socials />
-      <Products products={products} link={storeLink} />
+      <Products products={products} />
     </Layout>
   );
 }

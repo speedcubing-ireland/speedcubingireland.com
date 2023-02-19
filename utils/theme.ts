@@ -1,7 +1,12 @@
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
 
-export const themeData = [
+interface ThemeData {
+  name: string;
+  dark: boolean;
+}
+
+export const themeData: ThemeData[] = [
   {
     name: 'light',
     dark: false,

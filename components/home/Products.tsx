@@ -2,6 +2,7 @@
 import { faCartArrowDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
+import { SHOPIFY_STORE_URL } from '../../utils/constants';
 import { SimplifiedProduct } from '../../utils/shopify';
 
 function ProductCard({ product, link }: { product: SimplifiedProduct, link: string }) {
@@ -26,9 +27,11 @@ function ProductCard({ product, link }: { product: SimplifiedProduct, link: stri
   );
 }
 
-function Products({ products, link }: { products: SimplifiedProduct[], link: string }) {
+function Products({ products }: { products: SimplifiedProduct[] }) {
   if (!products) return null;
-  // eslint-disable-next-line no-param-reassign
+
+  const link = SHOPIFY_STORE_URL;
+
   return (
     <div className="bg-neutral text-neutral-content">
       <div className="text-center sm:text-left lg:text-left pt-12 px-8 pb-2">
