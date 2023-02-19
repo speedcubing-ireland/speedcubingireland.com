@@ -8,6 +8,12 @@ import Sponsors from '../components/home/Sponsors';
 import Stats from '../components/home/Stats';
 import Divider from '../components/home/Divider';
 import Products from '../components/home/Products';
+import {
+  shopify,
+  session,
+  simplifyShopifyProduct,
+  shopifyStoreURL,
+} from '../utils/shopify';
 
 export async function getStaticProps() {
   const comps = await getCompsFromNow();
@@ -22,9 +28,14 @@ export async function getStaticProps() {
     city: comp.city,
   }));
 
+  const shopifyProducts = await shopify.rest.Product.all({ session });
+  const simplifiedProducts = shopifyProducts.map(simplifyShopifyProduct);
+
   return {
     props: {
       comps: heroComps,
+      products: simplifiedProducts,
+      storeLink: shopifyStoreURL,
     },
     revalidate: CURRENT_COMP_REVALIDATE_TIME,
   };
@@ -32,6 +43,8 @@ export async function getStaticProps() {
 
 export default function Home({
   comps,
+  products,
+  storeLink,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <Layout>
@@ -40,7 +53,7 @@ export default function Home({
       <Divider />
       <Sponsors />
       <Socials />
-      <Products />
+      <Products products={products} link={storeLink} />
     </Layout>
   );
 }

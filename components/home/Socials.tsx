@@ -5,7 +5,7 @@ import Link from 'next/link';
 function Socials() {
   return (
     <div className="bg-primary text-primary-content">
-      <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center">
+      <div className="max-w-7xl mx-auto py-12 lg:py-16 px-8 lg:flex lg:items-center">
         <div className="lg:w-0 lg:flex-1">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl" id="newsletter-headline">
             Follow us on social media!

@@ -1,3 +1,4 @@
+// TODO: Unify this and the .env file
 export const CURRENT_COMP_REVALIDATE_TIME = 60 * 60 * 3;
 
 export const WCA_URL = 'https://www.worldcubeassociation.org';

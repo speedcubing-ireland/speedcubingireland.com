@@ -1,41 +1,53 @@
-import Image from 'next/image';
+/* eslint-disable @next/next/no-img-element */
+import { faCartArrowDown } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
+import { SimplifiedProduct } from '../../utils/shopify';
 
-function ProductCard() {
+function ProductCard({ product, link }: { product: SimplifiedProduct, link: string }) {
   return (
-    <div className="card w-full shadow-xl text-neutral-content glass">
-      <figure className="px-10 pt-10">
-        <Image
+    <Link href={link} className="card w-full shadow-xl text-neutral-content glass">
+      <figure>
+        <img
+          src={product.image}
           alt="Product"
-          src="https://cdn.shopify.com/s/files/1/0681/6645/1465/products/e370e59acfc21a22a36e17e6ff97a020.png?v=1674410237&width=360"
-          width={360}
-          height={360}
-          className="shadow-xl rounded-lg bg-white px-4"
         />
       </figure>
       <div className="card-body items-center text-center">
-        <h2 className="card-title">Epic T-Shirt</h2>
-        <div className="gap-2">
-          <div className="badge badge-secondary">€20</div>
+        <h2 className="card-title">{product.title}</h2>
+        <p>
+          From €
+          {product.price}
           {' '}
-          <div className="badge badge-accent">S-2XL</div>
-        </div>
-        <p>Gildan Heavy Cotton T-Shirt Very cool sand landscape</p>
-        <div className="card-actions">
-          <Link href="https://7de509.myshopify.com" className="btn btn-primary">Shop Now</Link>
-        </div>
+          EUR
+        </p>
       </div>
-    </div>
+    </Link>
   );
 }
 
-function Products() {
+function Products({ products, link }: { products: SimplifiedProduct[], link: string }) {
+  if (!products) return null;
+  // eslint-disable-next-line no-param-reassign
+  products = [...products, ...products].slice(0, 5);
   return (
-    <div className="bg-neutral text-neutral-content grid grid-cols-1 md:grid-cols-4 gap-4 p-10">
-      <ProductCard />
-      <ProductCard />
-      <ProductCard />
-      <ProductCard />
+    <div className="bg-neutral text-neutral-content">
+      <div className="text-center sm:text-left lg:text-left pt-12 px-8 pb-2">
+        <div className="grid grid-cols-1 sm:grid-cols-4 gap-y-2">
+          <h1 className="text-5xl font-bold col-span-3">
+            Official Merch
+          </h1>
+          <div className="">
+            <Link className="btn btn-accent gap-2 sm:float-right w-full sm:w-auto" href={link}>
+              Shop Now!
+              <FontAwesomeIcon icon={faCartArrowDown} />
+            </Link>
+          </div>
+        </div>
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-4 px-8 py-2">
+        {products.map((product) => <ProductCard key={product.id} product={product} link={link} />)}
+      </div>
     </div>
   );
 }
