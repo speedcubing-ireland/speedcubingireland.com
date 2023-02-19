@@ -5,9 +5,8 @@ import { MDXRemote } from 'next-mdx-remote';
 import path from 'path';
 import Layout from '../../components/layout/Layout';
 
-const postsPath = path.join(process.cwd(), '/posts/');
-
 export const getStaticPaths: GetStaticPaths = async () => {
+  const postsPath = path.join(process.cwd(), '/posts/');
   const files = readdirSync(postsPath);
   const slugs: string[] = [];
   files.forEach((file) => {
@@ -23,6 +22,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const postsPath = path.join(process.cwd(), '/posts/');
   const content = await readFileSync(`${postsPath + params!.slug}.mdx`, 'utf8');
   const mdxSource = await serialize(content);
   return {
