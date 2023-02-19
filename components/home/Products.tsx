@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { faCartArrowDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Image from 'next/image';
 import Link from 'next/link';
 import { SHOPIFY_STORE_URL } from '../../utils/constants';
 import { SimplifiedProduct } from '../../utils/shopify';
@@ -10,9 +11,11 @@ function ProductCard({ product }: { product: SimplifiedProduct }) {
   return (
     <Link href={productLink} className="card w-full shadow-xl text-neutral-content glass">
       <figure>
-        <img
+        <Image
           src={product.image}
           alt="Product"
+          width={350}
+          height={350}
         />
       </figure>
       <div className="card-body items-center text-center">
