@@ -1,4 +1,4 @@
-import { InferGetStaticPropsType } from 'next';
+import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import Hero, { HeroComp } from '../components/home/Hero';
 import Socials from '../components/home/Socials';
 import { getCompsFromNow } from '../utils/wca-api';
@@ -15,7 +15,7 @@ import {
   shopifyStoreURL,
 } from '../utils/shopify';
 
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async () => {
   const comps = await getCompsFromNow();
 
   const heroComps: HeroComp[] = comps.reverse().slice(0, 4).map((comp) => ({
@@ -39,7 +39,7 @@ export async function getStaticProps() {
     },
     revalidate: CURRENT_COMP_REVALIDATE_TIME,
   };
-}
+};
 
 export default function Home({
   comps,
@@ -47,7 +47,7 @@ export default function Home({
   storeLink,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
-    <Layout>
+    <Layout home>
       <Hero comps={comps} />
       <Stats />
       <Divider />

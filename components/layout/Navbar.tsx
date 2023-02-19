@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */ // daisyUI uses tabIndex
 import {
-  faAward, faBars, faBolt, faCircleInfo, faMessage, faMoon, faSun,
+  faAward, faBars, faBolt, faCircleInfo, faHome, faMessage, faMoon, faSun,
 } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -10,7 +10,7 @@ import { IRISH_COMPS_URL } from '../../utils/constants';
 import Logo from '../../public/logos/speedcubing-ireland-logo.svg';
 import DarkLogo from '../../public/logos/speedcubing-ireland-logo-dark.svg';
 
-function Navbar() {
+function Navbar({ home }: { home?: boolean }) {
   const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
@@ -54,9 +54,17 @@ function Navbar() {
     {
       text: 'Contact',
       icon: faMessage,
-      url: '/contact',
+      url: '/posts/contact',
     },
   ];
+
+  if (!home) {
+    navbarItems.unshift({
+      text: 'Home',
+      icon: faHome,
+      url: '/',
+    });
+  }
 
   const navbarListItems = (classes: string) => navbarItems.map((item) => (
     <li className={classes} key={item.text}>
@@ -70,9 +78,9 @@ function Navbar() {
   return (
     <div className="navbar bg-base-100 font-extrabold text-xl">
       <div className="navbar-start">
-        <a href="./" className="btn btn-ghost h-16">
+        <Link href="/" className="btn btn-ghost h-16">
           {logo}
-        </a>
+        </Link>
       </div>
       <div className="navbar-end w-full">
         <ul className="menu menu-horizontal px-1">
