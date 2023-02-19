@@ -5,9 +5,10 @@ import Link from 'next/link';
 import { SHOPIFY_STORE_URL } from '../../utils/constants';
 import { SimplifiedProduct } from '../../utils/shopify';
 
-function ProductCard({ product, link }: { product: SimplifiedProduct, link: string }) {
+function ProductCard({ product }: { product: SimplifiedProduct }) {
+  const productLink = `${SHOPIFY_STORE_URL}/products/${product.handle}`;
   return (
-    <Link href={link} className="card w-full shadow-xl text-neutral-content glass">
+    <Link href={productLink} className="card w-full shadow-xl text-neutral-content glass">
       <figure>
         <img
           src={product.image}
@@ -30,8 +31,6 @@ function ProductCard({ product, link }: { product: SimplifiedProduct, link: stri
 function Products({ products }: { products: SimplifiedProduct[] }) {
   if (!products || products.length === 0) return null;
 
-  const link = SHOPIFY_STORE_URL;
-
   return (
     <div className="bg-neutral text-neutral-content">
       <div className="text-center sm:text-left lg:text-left pt-12 px-8 pb-2">
@@ -40,7 +39,7 @@ function Products({ products }: { products: SimplifiedProduct[] }) {
             Official Merch
           </h1>
           <div className="">
-            <Link className="btn btn-accent gap-2 sm:float-right w-full sm:w-auto" href={link}>
+            <Link className="btn btn-accent gap-2 sm:float-right w-full sm:w-auto" href={SHOPIFY_STORE_URL}>
               Shop Now!
               <FontAwesomeIcon icon={faCartArrowDown} />
             </Link>
@@ -48,7 +47,7 @@ function Products({ products }: { products: SimplifiedProduct[] }) {
         </div>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-4 px-8 py-2">
-        {products.map((product) => <ProductCard key={product.id} product={product} link={link} />)}
+        {products.map((product) => <ProductCard key={product.id} product={product} />)}
       </div>
     </div>
   );

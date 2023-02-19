@@ -9,6 +9,7 @@ export type SimplifiedProduct = {
   title: string;
   image: string;
   price: string;
+  handle: string;
 };
 
 export function simplifyShopifyProduct(product: Product) {
@@ -18,6 +19,7 @@ export function simplifyShopifyProduct(product: Product) {
     title: product.title,
     image: product.image ? product.image.src : null,
     price: varients ? varients[0].price : null,
+    handle: product.handle,
   } as SimplifiedProduct;
 }
 
