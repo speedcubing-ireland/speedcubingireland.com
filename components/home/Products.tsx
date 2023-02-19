@@ -29,7 +29,6 @@ function ProductCard({ product, link }: { product: SimplifiedProduct, link: stri
 function Products({ products, link }: { products: SimplifiedProduct[], link: string }) {
   if (!products) return null;
   // eslint-disable-next-line no-param-reassign
-  products = [...products, ...products].slice(0, 5);
   return (
     <div className="bg-neutral text-neutral-content">
       <div className="text-center sm:text-left lg:text-left pt-12 px-8 pb-2">
