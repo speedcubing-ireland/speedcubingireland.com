@@ -9,12 +9,13 @@ import { useEffect, useState } from 'react';
 import { IRISH_COMPS_URL } from '../../utils/constants';
 import Logo from '../../public/logos/speedcubing-ireland-logo.svg';
 import DarkLogo from '../../public/logos/speedcubing-ireland-logo-dark.svg';
+import { isThemeDark } from '../../utils/theme';
 
 function Navbar({ home }: { home?: boolean }) {
   const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
-  const isDark = mounted && resolvedTheme === 'dark';
+  const isDark = mounted && isThemeDark(resolvedTheme);
 
   useEffect(() => setMounted(true), []);
 
@@ -22,7 +23,7 @@ function Navbar({ home }: { home?: boolean }) {
     if (!mounted) return undefined;
 
     const icon = isDark ? faSun : faMoon;
-    const handleThemeChange = () => setTheme(isDark ? 'light' : 'dark');
+    const handleThemeChange = () => setTheme(isDark ? 'emerald' : 'forest');
 
     return (
       <li className={classes}>

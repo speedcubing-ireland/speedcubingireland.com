@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import UTwistLogo from '../../public/logos/utwistcubes-logo.png';
 import UTwistLogoDark from '../../public/logos/utwistcubes-logo-dark.png';
-import { useLightDarkOption } from '../../utils/theme-hooks';
+import { useLightDarkOption } from '../../utils/theme';
 
 function Sponsors() {
   const uTwistLogo = useLightDarkOption(UTwistLogo, UTwistLogoDark);
