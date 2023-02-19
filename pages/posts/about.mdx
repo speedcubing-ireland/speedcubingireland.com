@@ -1,0 +1,22 @@
+import Layout from '../../components/layout/Layout';
+import { WCA_URL } from '../../utils/constants';
+
+# About Us
+
+Speedcubing Ireland is a not-for-profit, wholly volunteer-run organisation dedicated to supporting the speedcubing community in Ireland. Speedcubing is the act of solving twisty puzzles, such as the Rubik&apos;s Cube®, as quickly as possible. 
+
+The [World Cube Association]({WCA_URL}) has recognised Speedcubing Ireland as a regional organisation since 2019. The WCA governs competitions for twisty puzzles, of which the most well known is the Rubik&apos;s Cube® or the 3x3x3 Cube as it is officially called. There are currently 17 official WCA events, including big cubes up to 7x7x7, Blindfolded events and some events that are not even cubes such as the Pyraminx and Clock.
+
+Speedcubing Ireland runs competitions all over Ireland but we need local organisers to help us out.  If you are interested in having a competition in your local area, [contact us](/contact) for further information.  Competitions are open to anyone who can solve a cube, they are supportive and welcoming environments and are a great experience regardless of your age or ability.
+
+![](/images/croud.webp)
+
+export default ({ children }) => (
+  <Layout>
+    <div className="bg-base-100">
+      <article className="prose max-w-prose mx-auto p-8">
+        {children}
+      </article>
+    </div>
+  </Layout>
+);

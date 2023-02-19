@@ -49,12 +49,12 @@ function Navbar() {
     {
       text: 'About',
       icon: faCircleInfo,
-      url: '/',
+      url: '/posts/about',
     },
     {
       text: 'Contact',
       icon: faMessage,
-      url: '/',
+      url: '/contact',
     },
   ];
 
