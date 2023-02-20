@@ -11,6 +11,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     await res.revalidate('/redirects/wca-live', { unstable_onlyGenerated: true });
     return res.json({ revalidated: true });
   } catch (err) {
-    return res.status(500).send('Error revalidating');
+    let message = 'Unknown Error';
+    if (err instanceof Error) message = err.message;
+    return res.status(500).send(message);
   }
 }
