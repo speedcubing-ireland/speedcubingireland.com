@@ -7,8 +7,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   try {
     await res.revalidate('/', { unstable_onlyGenerated: true });
-    await res.revalidate('/redirects/comp-groups', { unstable_onlyGenerated: true });
-    await res.revalidate('/redirects/wca-live', { unstable_onlyGenerated: true });
+
     return res.json({ revalidated: true });
   } catch (err) {
     let message = 'Unknown Error';
