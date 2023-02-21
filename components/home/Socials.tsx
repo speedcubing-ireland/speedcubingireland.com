@@ -17,13 +17,13 @@ function Socials() {
           </p>
         </div>
         <div className="mt-8 lg:mt-0 lg:ml-8">
-          <Link className="btn btn-ghost text-5xl" href="https://www.facebook.com/SpeedcubingIreland">
+          <Link className="btn btn-ghost text-5xl" href="https://www.facebook.com/SpeedcubingIreland" aria-label="Facebook">
             <FontAwesomeIcon icon={faFacebook} />
           </Link>
-          <Link className="btn btn-ghost text-5xl" href="https://www.instagram.com/speedcubingireland/">
+          <Link className="btn btn-ghost text-5xl" href="https://www.instagram.com/speedcubingireland/" aria-label="Instagram">
             <FontAwesomeIcon icon={faInstagram} />
           </Link>
-          <Link className="btn btn-ghost text-5xl" href="https://discord.gg/FCdnfetK7c">
+          <Link className="btn btn-ghost text-5xl" href="https://discord.gg/FCdnfetK7c" aria-label="Discord">
             <FontAwesomeIcon icon={faDiscord} />
           </Link>
         </div>

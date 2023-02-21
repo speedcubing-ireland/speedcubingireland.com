@@ -62,10 +62,10 @@ function AllSponsors({ dark }: { dark: boolean }) {
 function SelfSponsor({ dark }: { dark: boolean }) {
   return (
     <>
-      <Link href="/" className="btn btn-ghost h-full p-2 mx-4">
+      <Link href="/" className="btn btn-ghost h-full p-2 mx-4" aria-label="Speedcubing Ireland Logo">
         {dark ? <SILogoDark className="h-16" /> : <SILogo className="h-16" />}
       </Link>
-      <Link href={WCA_URL} className="btn btn-ghost h-full p-2 mx-4">
+      <Link href={WCA_URL} className="btn btn-ghost h-full p-2 mx-4" aria-label="WCA Logo">
         {dark ? <WCALogoDark className="h-16" /> : <WCALogo className="h-16" />}
       </Link>
     </>

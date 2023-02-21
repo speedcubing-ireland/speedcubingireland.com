@@ -27,7 +27,12 @@ function Navbar({ home }: { home?: boolean }) {
 
     return (
       <li className={classes}>
-        <button type="button" onClick={handleThemeChange} className="btn btn-ghost text-xl btn-block">
+        <button
+          aria-label="Toggle Dark Mode"
+          type="button"
+          onClick={handleThemeChange}
+          className="btn btn-ghost text-xl btn-block"
+        >
           <FontAwesomeIcon icon={icon} className="pt-0.5" />
         </button>
       </li>
@@ -79,7 +84,11 @@ function Navbar({ home }: { home?: boolean }) {
   return (
     <div className="navbar bg-base-100 font-extrabold text-xl">
       <div className="navbar-start">
-        <Link href="/" className="btn btn-ghost h-16">
+        <Link
+          href="/"
+          className="btn btn-ghost h-16"
+          aria-label="Speedcubing Ireland Logo"
+        >
           {logo}
         </Link>
       </div>
