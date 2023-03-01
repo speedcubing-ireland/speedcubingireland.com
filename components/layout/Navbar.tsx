@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
-import { IRISH_COMPS_URL, SHOPIFY_STORE_URL } from '../../utils/constants';
+import { IRISH_COMPS_URL /* , SHOPIFY_STORE_URL */ } from '../../utils/constants';
 import Logo from '../../public/logos/speedcubing-ireland-logo.svg';
 import DarkLogo from '../../public/logos/speedcubing-ireland-logo-dark.svg';
 import { isThemeDark } from '../../utils/theme';
@@ -57,11 +57,11 @@ function Navbar({ home }: { home?: boolean }) {
       icon: faCircleInfo,
       url: '/posts/about',
     },
-    {
-      text: 'Shop',
-      icon: faBagShopping,
-      url: SHOPIFY_STORE_URL,
-    },
+    // {
+    //   text: 'Shop',
+    //   icon: faBagShopping,
+    //   url: SHOPIFY_STORE_URL,
+    // },
   ];
 
   if (!home) {
