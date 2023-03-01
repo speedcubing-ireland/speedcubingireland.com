@@ -32,25 +32,38 @@ function ProductCard({ product }: { product: SimplifiedProduct }) {
 }
 
 function Products({ products }: { products: SimplifiedProduct[] }) {
-  if (!products || products.length === 0) return null;
+  const disabled = !products || products.length === 0;
 
   return (
     <div className="bg-neutral text-neutral-content">
-      <div className="text-center sm:text-left lg:text-left pt-12 px-8 pb-2">
+      <div className={`text-center sm:text-left lg:text-left pt-12 px-8 pb-2 ${disabled && 'max-w-7xl mx-auto'}`}>
         <div className="grid grid-cols-1 sm:grid-cols-4 gap-y-2">
           <h1 className="text-5xl font-bold col-span-3">
             Official Merch
+            {disabled && (
+              <>
+                <br />
+                <span className="text-4xl text-accent">
+                  Coming Soon!
+                </span>
+              </>
+            )}
           </h1>
           <div className="">
-            <Link className="btn btn-accent gap-2 sm:float-right w-full sm:w-auto" href={SHOPIFY_STORE_URL}>
-              Shop Now!
-              <FontAwesomeIcon icon={faCartArrowDown} />
-            </Link>
+            {!disabled && (
+              <Link
+                className="btn btn-accent gap-2 sm:float-right w-full sm:w-auto"
+                href={SHOPIFY_STORE_URL}
+              >
+                Shop Now!
+                <FontAwesomeIcon icon={faCartArrowDown} />
+              </Link>
+            )}
           </div>
         </div>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-4 px-8 py-2">
-        {products.map((product) => <ProductCard key={product.id} product={product} />)}
+        {!disabled && products.map((product) => <ProductCard key={product.id} product={product} />)}
       </div>
     </div>
   );
