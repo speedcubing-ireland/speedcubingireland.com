@@ -132,7 +132,7 @@ function HeroCard({ comps }: HeroProps) {
     <CardItem
       key={comp.id}
       title={getCardTitle(comp)}
-      name={comp.name}
+      name={comp.name.slice(0, -4)}
       desc={getCardDesc(comp)}
       url={`${WCA_URL}/competitions/${comp.id}`}
       icon={comp.name.includes('Championship') && faTrophy}
