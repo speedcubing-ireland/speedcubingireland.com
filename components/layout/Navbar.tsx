@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */ // daisyUI uses tabIndex
 import {
-  faAward, faBagShopping, faBars, faBolt, faCircleInfo, faHome, faMoon, faSun,
+  faAward, /* faBagShopping, */ faBars, faBolt, faCircleInfo, faHome, faMoon, faSun,
 } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
