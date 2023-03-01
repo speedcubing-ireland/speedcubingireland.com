@@ -18,14 +18,9 @@ function ThemeController() {
     if (!window) return () => {};
 
     const listener = (e: KeyboardEvent) => {
-      if ((!e.metaKey && !e.ctrlKey) || !theme) return;
-
-      let increment = 0;
-      if (e.key === '[') {
-        increment = -1;
-      } else if (e.key === ']') {
-        increment = 1;
-      } else return;
+      if (!theme) return;
+      if (e.key.toUpperCase() !== 'T') return;
+      const increment = e.shiftKey ? -1 : 1;
 
       const themeIdx = themes.indexOf(theme);
       if (themeIdx === -1) return;
