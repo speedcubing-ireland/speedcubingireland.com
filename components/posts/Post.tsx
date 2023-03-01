@@ -1,8 +1,12 @@
+import Head from 'next/head';
 import Layout from '../layout/Layout';
 
-export default function Post({ children }: { children: React.ReactNode }) {
+export default function Post({ title, children }: { title: string, children: React.ReactNode }) {
   return (
     <Layout>
+      <Head>
+        <title>{`${title} - Speedcubing Ireland`}</title>
+      </Head>
       <div className="bg-base-100">
         <article className="prose max-w-prose mx-auto p-8">
           {children}

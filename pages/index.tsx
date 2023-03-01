@@ -1,4 +1,5 @@
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
+import Head from 'next/head';
 import Hero, { HeroComp } from '../components/home/Hero';
 import Socials from '../components/home/Socials';
 import { getCompsFromNow } from '../utils/wca-api';
@@ -47,6 +48,10 @@ export default function Home({
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <Layout home>
+      <Head>
+        <title>Speedcubing Ireland</title>
+        <meta name="description" content="Speedcubing Ireland aims to support the growth of the Irish speedcubing community by provide information about cubing and organising WCA competitions." />
+      </Head>
       <Hero comps={comps} />
       <Stats />
       <Divider />
