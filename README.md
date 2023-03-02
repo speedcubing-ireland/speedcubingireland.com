@@ -5,7 +5,7 @@
 This is the repo which runs [speedcubingireland.com](https://speedcubingireland.com/).
 
 ## Getting Started
-Firstly, make sure you have git, a recent version of [Node.js](https://nodejs.org/en/), and [Yarn](https://yarnpkg.com/) installed.
+Firstly, make sure you have git, a recent version of [Node.js](https://nodejs.org/en/), and [Yarn](https://yarnpkg.com/) installed. You can also use a github codespace to get started.
 
 To clone and enter the repo, run:
 
