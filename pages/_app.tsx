@@ -5,6 +5,7 @@ import { config } from '@fortawesome/fontawesome-svg-core';
 import { ThemeProvider, useTheme } from 'next-themes';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { useEffect } from 'react';
+import Script from 'next/script';
 import { themeData } from '../utils/theme';
 
 config.autoAddCss = false;
@@ -37,16 +38,32 @@ function ThemeController() {
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <ThemeProvider
-      attribute="data-theme"
-      themes={themes}
-      disableTransitionOnChange
-      defaultTheme="emerald"
-      enableSystem={false}
-    >
-      <ThemeController />
-      <Component {...pageProps} />
-      <Analytics />
-    </ThemeProvider>
+    <>
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+    
+          gtag('config', 'G-K4DPMQTB75');
+        `}
+      </Script>
+      <Script
+        async
+        src="https://www.googletagmanager.com/gtag/js?id=G-K4DPMQTB75"
+        strategy="afterInteractive"
+      />
+      <ThemeProvider
+        attribute="data-theme"
+        themes={themes}
+        disableTransitionOnChange
+        defaultTheme="emerald"
+        enableSystem={false}
+      >
+        <ThemeController />
+        <Component {...pageProps} />
+        <Analytics />
+      </ThemeProvider>
+    </>
   );
 }
