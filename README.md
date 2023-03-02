@@ -1,5 +1,5 @@
 # Speedcubing Ireland
-![Vercel](https://therealsujitk-vercel-badge.vercel.app/?app=speedcubingireland-com)
+[![Vercel](https://therealsujitk-vercel-badge.vercel.app/?app=speedcubingireland-com)](https://speedcubingireland.com/)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 This is the repo which runs [speedcubingireland.com](https://speedcubingireland.com/).
@@ -41,5 +41,5 @@ import Post from '../../components/posts/Post';
 # Hello World
 This is where the post content goes.
 
-export default ({ children }) => <Post>{children}</Post>
+export default ({ children }) => <Post title="Post Title">{children}</Post>
 ```
