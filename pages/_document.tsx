@@ -1,7 +1,6 @@
 import {
   Html, Head, Main, NextScript,
 } from 'next/document';
-import GoogleAnalytics from '../components/analytics/GoogleAnalytics';
 
 export default function Document() {
   return (
@@ -17,7 +16,6 @@ export default function Document() {
         <meta name="theme-color" content="#ffffff" />
       </Head>
       <body>
-        <GoogleAnalytics />
         <Main />
         <NextScript />
       </body>

@@ -5,6 +5,7 @@ import { config } from '@fortawesome/fontawesome-svg-core';
 import { ThemeProvider, useTheme } from 'next-themes';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { useEffect } from 'react';
+import { GoogleAnalytics } from 'nextjs-google-analytics';
 import { themeData } from '../utils/theme';
 
 config.autoAddCss = false;
@@ -45,6 +46,7 @@ export default function App({ Component, pageProps }: AppProps) {
       enableSystem={false}
     >
       <ThemeController />
+      <GoogleAnalytics trackPageViews gaMeasurementId="G-K4DPMQTB75" />
       <Component {...pageProps} />
       <Analytics />
     </ThemeProvider>
