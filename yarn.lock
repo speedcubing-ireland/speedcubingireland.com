@@ -1294,17 +1294,17 @@
   resolved "https://registry.yarnpkg.com/@rushstack/eslint-patch/-/eslint-patch-1.2.0.tgz#8be36a1f66f3265389e90b5f9c9962146758f728"
   integrity sha512-sXo/qW2/pAcmT43VoRKOJbDOfV3cYpq3szSVfIThQXNt+E4DfKj361vaAt3c88U5tPUxzEswam7GW48PJqtKAg==
 
-"@shopify/network@^1.5.1":
-  version "1.6.4"
-  resolved "https://registry.yarnpkg.com/@shopify/network/-/network-1.6.4.tgz#fdfa8379cb6e06f05ee63d24aafcd6f8e275cb34"
-  integrity sha512-V+//Et386LnYdtNhQ3e33AKYfU25XEt8H5XYeMqPvJZpVvC9Z1lHKQMpmM/zq13VXjPUjt9/sNxHxMP3I6cbJg==
+"@shopify/network@^3.2.1":
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/@shopify/network/-/network-3.2.1.tgz#c51590bb9ccd177bb7a35c2bad482233198d215b"
+  integrity sha512-Ih/6Oe80dynlUsRfEqptWBfsySCqI0rjQvPAjS8HuWeK9nZ+TvmYScfxjucKXZ2deXwAClnU6SMdh3/B1lMMog==
 
-"@shopify/shopify-api@^6.2.0":
-  version "6.2.0"
-  resolved "https://registry.yarnpkg.com/@shopify/shopify-api/-/shopify-api-6.2.0.tgz#3c37ea5d324cd3b1509df6e49026684f8f6cd966"
-  integrity sha512-f1IexEB7ijeMw0xG1taaO0Z0jQfD/8CVqjecSbVqlSypjBTCliCQ/Wv7yHxsmJbIMjIpRLcOHHbUy5ed+CEVvg==
+"@shopify/shopify-api@^7.0.0":
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/@shopify/shopify-api/-/shopify-api-7.0.0.tgz#7c018905be083aa1232ae63674e495f590effe06"
+  integrity sha512-i5Tp5RuUBX2Ajc4aGNoBZRp1VhhkNoRZb4TiqiyXN+S7dyRHnA8M22SwAshArtvV8k2bsj66dsOIN6jiqI6yPw==
   dependencies:
-    "@shopify/network" "^1.5.1"
+    "@shopify/network" "^3.2.1"
     "@types/node-fetch" "^2.5.7"
     "@types/supertest" "^2.0.10"
     jose "^4.9.1"
