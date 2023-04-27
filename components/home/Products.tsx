@@ -16,6 +16,7 @@ function ProductCard({ product }: { product: SimplifiedProduct }) {
           alt="Product"
           width={350}
           height={350}
+          className="w-full"
         />
       </figure>
       <div className="card-body items-center text-center">
