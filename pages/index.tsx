@@ -31,7 +31,11 @@ export const getStaticProps: GetStaticProps = async () => {
 
   let simplifiedProducts: SimplifiedProduct[] = [];
   const shopifyProducts = session && shopify && await shopify.rest.Product.all({ session });
-  if (shopifyProducts) simplifiedProducts = shopifyProducts.map(simplifyShopifyProduct);
+  if (shopifyProducts) {
+    simplifiedProducts = shopifyProducts
+      .filter((product) => product.status === 'active')
+      .map(simplifyShopifyProduct);
+  }
 
   return {
     props: {
