@@ -63,9 +63,8 @@ function Navbar() {
       text: 'About',
       icon: faCircleInfo,
       url: '/posts/about',
-    }
+    },
   ].filter((item) => router.pathname !== item.url);
-  
 
   const navbarListItems = (classes: string) => navbarItems.map((item) => (
     <li className={classes} key={item.text}>
