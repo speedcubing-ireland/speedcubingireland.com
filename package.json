@@ -18,7 +18,7 @@
     "@mdx-js/react": "^2.3.0",
     "@next/font": "13.3.0",
     "@next/mdx": "^13.1.6",
-    "@shopify/shopify-api": "^6.2.0",
+    "@shopify/shopify-api": "^7.4.0",
     "@svgr/webpack": "^6.5.1",
     "@tailwindcss/typography": "^0.5.9",
     "@types/node": "18.15.11",
