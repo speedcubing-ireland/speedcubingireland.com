@@ -40,7 +40,7 @@
     "next": "13.4.9",
     "next-themes": "^0.2.1",
     "nextjs-google-analytics": "^2.3.3",
-    "postcss": "^8.4.21",
+    "postcss": "^8.4.25",
     "prop-types": "^15.8.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
