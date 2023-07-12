@@ -32,7 +32,7 @@ export const getStaticProps: GetStaticProps = async () => {
   let simplifiedProducts: SimplifiedProduct[] = [];
   const shopifyProducts = session && shopify && await shopify.rest.Product.all({ session });
   if (shopifyProducts) {
-    simplifiedProducts = shopifyProducts
+    simplifiedProducts = shopifyProducts.data
       .filter((product) => product.status === 'active')
       .map(simplifyShopifyProduct);
   }
@@ -51,7 +51,7 @@ export default function Home({
   products,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
-    <Layout home>
+    <Layout>
       <Head>
         <title>Speedcubing Ireland</title>
         <meta name="description" content="Speedcubing Ireland aims to support the growth of the Irish speedcubing community by provide information about cubing and organising WCA competitions." />

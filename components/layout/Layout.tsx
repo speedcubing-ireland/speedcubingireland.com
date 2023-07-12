@@ -5,10 +5,9 @@ import Navbar from './Navbar';
 interface LayoutProps {
   title?: string | undefined;
   children?: JSX.Element | JSX.Element[] | undefined;
-  home?: boolean;
 }
 
-function Layout({ title, children, home }: LayoutProps) {
+function Layout({ title, children }: LayoutProps) {
   const pageTitle = title ? `${title} | Speedcubing Ireland` : 'Speedcubing Ireland';
 
   // TODO: add proper meta tags
@@ -20,7 +19,7 @@ function Layout({ title, children, home }: LayoutProps) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <Navbar home={home} />
+        <Navbar />
         {children}
         <Footer />
       </main>

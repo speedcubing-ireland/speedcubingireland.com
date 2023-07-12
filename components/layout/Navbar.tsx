@@ -1,22 +1,24 @@
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */ // daisyUI uses tabIndex
 import {
-  faAward, faBagShopping, faBars, faBolt, faCircleInfo, faHome, faMoon, faSun,
+  faAward, faBars, faBolt, faCircleInfo, faHome, faMoon, faSun,
 } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
-import { IRISH_COMPS_URL, SHOPIFY_STORE_URL } from '../../utils/constants';
+import { useRouter } from 'next/router';
+import { IRISH_COMPS_URL } from '../../utils/constants';
 import Logo from '../../public/logos/speedcubing-ireland-logo.svg';
 import DarkLogo from '../../public/logos/speedcubing-ireland-logo-dark.svg';
 import { isThemeDark } from '../../utils/theme';
 
-function Navbar({ home }: { home?: boolean }) {
+function Navbar() {
   const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
   const isDark = mounted && isThemeDark(resolvedTheme);
 
+  const router = useRouter();
   useEffect(() => setMounted(true), []);
 
   const themeButton = (classes: string) => {
@@ -43,6 +45,11 @@ function Navbar({ home }: { home?: boolean }) {
 
   const navbarItems = [
     {
+      text: 'Home',
+      icon: faHome,
+      url: '/',
+    },
+    {
       text: 'WCA Live',
       icon: faBolt,
       url: '/redirects/wca-live',
@@ -56,21 +63,9 @@ function Navbar({ home }: { home?: boolean }) {
       text: 'About',
       icon: faCircleInfo,
       url: '/posts/about',
-    },
-    {
-      text: 'Shop',
-      icon: faBagShopping,
-      url: SHOPIFY_STORE_URL,
-    },
-  ];
-
-  if (!home) {
-    navbarItems.unshift({
-      text: 'Home',
-      icon: faHome,
-      url: '/',
-    });
-  }
+    }
+  ].filter((item) => router.pathname !== item.url);
+  
 
   const navbarListItems = (classes: string) => navbarItems.map((item) => (
     <li className={classes} key={item.text}>
