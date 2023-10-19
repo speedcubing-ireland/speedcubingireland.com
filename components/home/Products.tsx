@@ -40,12 +40,12 @@ function Products({ products }: { products: SimplifiedProduct[] }) {
       <div className={`text-center sm:text-left lg:text-left pt-12 px-8 pb-2 ${disabled && 'max-w-7xl mx-auto'}`}>
         <div className="grid grid-cols-1 sm:grid-cols-4 gap-y-2">
           <h1 className="text-5xl font-bold col-span-3">
-            Official Merch
+            Marxandatge oficial
             {disabled && (
               <>
                 <br />
                 <span className="text-4xl text-accent">
-                  Coming Soon!
+                  Properament!
                 </span>
               </>
             )}
@@ -56,7 +56,7 @@ function Products({ products }: { products: SimplifiedProduct[] }) {
                 className="btn btn-accent gap-2 sm:float-right w-full sm:w-auto"
                 href={SHOPIFY_STORE_URL}
               >
-                Shop Now!
+                Comprar!
                 <FontAwesomeIcon icon={faCartArrowDown} />
               </Link>
             )}

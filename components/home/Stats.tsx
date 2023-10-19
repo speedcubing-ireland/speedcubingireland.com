@@ -19,13 +19,13 @@ function Stat(title: string, value: string, color: string, icon: any) {
 function Stats() {
   const stats = [
     {
-      title: 'Competitors', value: '750+', color: 'text-secondary', icon: faPeopleGroup,
+      title: 'Competidors', value: '750+', color: 'text-secondary', icon: faPeopleGroup,
     },
     {
-      title: 'Solves', value: '55000+', color: 'text-primary', icon: faStopwatch,
+      title: 'Resolucions', value: '55000+', color: 'text-primary', icon: faStopwatch,
     },
     {
-      title: 'Competitions', value: '25+', color: 'text-secondary', icon: faTrophy,
+      title: 'Competicions', value: '25+', color: 'text-secondary', icon: faTrophy,
     },
   ];
 

@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { IRISH_COMPS_URL } from '../../utils/constants';
+import { CAT_COMPS_URL } from '../../utils/constants';
 import Logo from '../../public/logos/speedcubing-ireland-logo.svg';
 import DarkLogo from '../../public/logos/speedcubing-ireland-logo-dark.svg';
 import { isThemeDark } from '../../utils/theme';
@@ -55,12 +55,12 @@ function Navbar() {
       url: '/redirects/wca-live',
     },
     {
-      text: 'Competitions',
+      text: 'Competicions',
       icon: faAward,
-      url: IRISH_COMPS_URL,
+      url: CAT_COMPS_URL,
     },
     {
-      text: 'About',
+      text: 'Sobre nosaltres',
       icon: faCircleInfo,
       url: '/posts/about',
     },

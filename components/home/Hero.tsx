@@ -1,7 +1,7 @@
 import { faCaretRight, faLocationArrow, faTrophy } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
-import { IRISH_COMPS_URL, WCA_URL } from '../../utils/constants';
+import { CAT_COMPS_URL, WCA_URL } from '../../utils/constants';
 
 // TODO: handle belfast comps :)
 
@@ -89,7 +89,7 @@ function getCardDesc(comp: HeroComp) {
   let regText: string;
   let regClass: string;
   if (now > new Date(comp.registration_close)) {
-    regText = 'Registration is closed';
+    regText = 'Registre tancat';
     regClass = '';
   } else {
     // get time until registration opens like opens in 2 hours or opens in 3 weeks
@@ -100,15 +100,15 @@ function getCardDesc(comp: HeroComp) {
     const seconds = Math.floor((diff / 1000) % 60);
     regClass = 'text-primary';
     if (days > 0) {
-      regText = `Registration opens in ${days} days`;
+      regText = `El registre obre en ${days} dies`;
     } else if (hours > 0) {
-      regText = `Registration opens in ${hours} hours`;
+      regText = `El registre obre en ${hours} hores`;
     } else if (minutes > 0) {
-      regText = `Registration opens in ${minutes} minutes`;
+      regText = `El registre obre en ${minutes} minuts`;
     } else if (seconds > 0) {
-      regText = `Registration opens in ${seconds} seconds`;
+      regText = `El registre obre en ${seconds} segons`;
     } else {
-      regText = 'Registration is now open!';
+      regText = 'El registre està obert!';
     }
   }
   return <span className={regClass}>{regText}</span>;
@@ -119,10 +119,10 @@ function HeroCard({ comps }: HeroProps) {
     return (
       <Card>
         <CardItem
-          title={<span className="font-bold text-primary">No upcoming competitions</span>}
+          title={<span className="font-bold text-primary">No hi han properes competicions</span>}
           name="Check back later!"
-          desc={<span className="text-secondary">No competitions are currently scheduled</span>}
-          url={IRISH_COMPS_URL}
+          desc={<span className="text-secondary">Actualment no hi han competicions programades</span>}
+          url={CAT_COMPS_URL}
         />
       </Card>
     );
@@ -153,15 +153,13 @@ function Hero({ comps }: HeroProps) {
     >
       <div className="hero-content flex-col lg:flex-row-reverse py-10 gap-12">
         <div className="text-center text-primary-content lg:text-left">
-          <h1 className="text-5xl font-bold gap-2">Upcoming Competitions</h1>
+          <h1 className="text-5xl font-bold gap-2">Properes competicions</h1>
           <p className="py-6 text-lg text-left">
-            Welcome to Speedcubing Ireland, the official WCA regional organization
-            for promoting and supporting the exciting world of speedcubing in Ireland!
-
-            Check out our list of upcoming competitions to get involved and join the fun!
+            Benvingut a l'ACSC, l'organització regional que promou i dóna suport al interessant món del speedcubing a Catalunya!
+            Revisa el llistat de les properes competicions per participar i formar part de la diversió!
           </p>
-          <Link className="btn gap-2" href={IRISH_COMPS_URL}>
-            See More!
+          <Link className="btn gap-2" href={CAT_COMPS_URL}>
+            Veure més!
             <FontAwesomeIcon icon={faCaretRight} />
           </Link>
         </div>

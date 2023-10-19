@@ -5,7 +5,7 @@ export default function Post({ title, children }: { title: string, children: Rea
   return (
     <Layout>
       <Head>
-        <title>{`${title} - Speedcubing Ireland`}</title>
+        <title>{`${title} - speedcubing.cat`}</title>
       </Head>
       <div className="bg-base-100">
         <article className="prose max-w-prose mx-auto p-8">

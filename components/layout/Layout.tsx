@@ -8,7 +8,7 @@ interface LayoutProps {
 }
 
 function Layout({ title, children }: LayoutProps) {
-  const pageTitle = title ? `${title} | Speedcubing Ireland` : 'Speedcubing Ireland';
+  const pageTitle = title ? `${title} | speedcubing.cat` : 'speedcubing.cat';
 
   // TODO: add proper meta tags
   return (
