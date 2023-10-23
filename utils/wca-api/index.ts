@@ -28,16 +28,24 @@ export async function getCompsFromNow(): Promise<Competition[]> {
   const comps = await searchCompetitions({
     country_iso2: 'IE',
     start: formatDate(dateInDays(-4)),
-    sort: ['-start_date'].join(','),
+    sort: ['start_date'].join(','),
   });
+
+  const ukComps = await searchCompetitions({
+    country_iso2: 'GB',
+    start: formatDate(dateInDays(-4)),
+    sort: ['start_date'].join(','),
+  });
+
+  const niComps = ukComps.filter((comp) => comp.city.includes('County'));
 
   const today = getCurrentDate();
   today.setHours(0, 0, 0, 0);
 
-  return comps.filter((comp) => {
+  return [...comps, ...niComps].filter((comp) => {
     const compDate = new Date(comp.end_date);
     return compDate >= today;
-  });
+  }).sort((a, b) => Date.parse(b.start_date) - Date.parse(a.start_date));
 }
 
 export async function getCurrentCompetition(): Promise<Competition | undefined> {

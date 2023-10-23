@@ -3,8 +3,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
 import { IRISH_COMPS_URL, WCA_URL } from '../../utils/constants';
 
-// TODO: handle belfast comps :)
-
 export interface HeroComp {
   id: string;
   name: string;
@@ -52,11 +50,11 @@ interface HeroProps {
   comps: HeroComp[];
 }
 
-function getCardTitle(comp: HeroComp) {
+function formatCompDates(comp: HeroComp): string {
   const startDate = new Date(comp.start_date);
   const endDate = new Date(comp.end_date);
 
-  // Extreme case: Dec 31, 2022 - Jan 1, 2023
+  // Extreme cases - Dec 31, 2022 - Jan 1, 2023
   const startYear = startDate.getFullYear();
   const startMonth = startDate.toLocaleString('default', { month: 'short' });
   const startDay = startDate.getDate();
@@ -65,18 +63,29 @@ function getCardTitle(comp: HeroComp) {
   const endMonth = endDate.toLocaleString('default', { month: 'short' });
   const endDay = endDate.getDate();
 
-  let date = `${startMonth} ${startDay}`;
+  let date = `${startMonth} ${startDay}, ${startYear} - ${endMonth} ${endDay}, ${endYear}`;
+  date = `${startMonth} ${startDay}`;
+
+  if (startDay === endDay && startMonth === endMonth && startYear === endYear) return `${date}, ${startYear}`;
+
   if (startYear !== endYear) date += `, ${startYear}`;
   date += ' - ';
+
   if (startMonth !== endMonth || startYear !== endYear) date += `${endMonth} `;
-  // date += `${endDay}, ${endYear}`;
-  date += `${endDay}`;
+  date += `${endDay}, ${endYear}`;
+
+  return date;
+}
+
+function getCardTitle(comp: HeroComp) {
+  const date = formatCompDates(comp);
+  const city = (comp.city.split(',').shift()?.trim() ?? comp.city).replace('County', '').trim();
 
   return (
     <>
       <FontAwesomeIcon icon={faLocationArrow} className="text-primary" />
       &nbsp;
-      <span className="font-bold text-primary">{comp.city.split(',').pop()?.trim() ?? comp.city}</span>
+      <span className="font-bold text-primary">{city}</span>
       &nbsp;
       {date}
     </>
