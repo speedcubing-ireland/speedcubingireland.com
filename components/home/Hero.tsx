@@ -164,8 +164,9 @@ function Hero({ comps }: HeroProps) {
         <div className="text-center text-primary-content lg:text-left">
           <h1 className="text-5xl font-bold gap-2">Upcoming Competitions</h1>
           <p className="py-6 text-lg text-left">
-            Welcome to Speedcubing Ireland, the official WCA regional organization
-            for promoting and supporting the exciting world of speedcubing in Ireland!
+            Welcome to Speedcubing Ireland, an
+            {/* official WCA regional */ ' '}
+            organization for promoting and supporting the exciting world of speedcubing in Ireland!
 
             Check out our list of upcoming competitions to get involved and join the fun!
           </p>

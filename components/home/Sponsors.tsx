@@ -2,13 +2,13 @@ import Image, { StaticImageData } from 'next/image';
 import Link from 'next/link';
 import SILogo from '../../public/logos/speedcubing-ireland-logo.svg';
 import SILogoDark from '../../public/logos/speedcubing-ireland-logo-dark.svg';
-import WCALogo from '../../public/logos/wca-logo.svg';
-import WCALogoDark from '../../public/logos/wca-logo-dark.svg';
+// import WCALogo from '../../public/logos/wca-logo.svg';
+// import WCALogoDark from '../../public/logos/wca-logo-dark.svg';
 // import UTwistLogo from '../../public/logos/utwistcubes-logo.png';
 // import UTwistLogoDark from '../../public/logos/utwistcubes-logo-dark.png';
 
 import { useLightDarkOption } from '../../utils/theme';
-import { WCA_URL } from '../../utils/constants';
+// import { WCA_URL } from '../../utils/constants';
 
 interface SponsorData {
   name: string;
@@ -65,9 +65,9 @@ function SelfSponsor({ dark }: { dark: boolean }) {
       <Link href="/" className="btn btn-ghost h-full p-2 mx-4" aria-label="Speedcubing Ireland Logo">
         {dark ? <SILogoDark className="h-16" /> : <SILogo className="h-16" />}
       </Link>
-      <Link href={WCA_URL} className="btn btn-ghost h-full p-2 mx-4" aria-label="WCA Logo">
+      {/* <Link href={WCA_URL} className="btn btn-ghost h-full p-2 mx-4" aria-label="WCA Logo">
         {dark ? <WCALogoDark className="h-16" /> : <WCALogo className="h-16" />}
-      </Link>
+      </Link> */}
     </>
   );
 }
