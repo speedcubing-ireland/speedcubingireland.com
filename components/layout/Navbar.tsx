@@ -25,7 +25,7 @@ function Navbar() {
     if (!mounted) return undefined;
 
     const icon = isDark ? faSun : faMoon;
-    const handleThemeChange = () => setTheme(isDark ? 'emerald' : 'halloween');
+    const handleThemeChange = () => setTheme(isDark ? 'emerald' : 'forest');
 
     return (
       <li className={classes}>
