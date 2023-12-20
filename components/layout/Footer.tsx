@@ -6,7 +6,7 @@ import WhiteLogo from '../../public/logos/speedcubing-ireland-logo-white.svg';
 
 function Footer() {
   return (
-    <footer className="footer p-10 bg-neutral text-neutral-content">
+    <footer className="footer p-10 mt-auto bg-neutral text-neutral-content">
       <div>
         <WhiteLogo className="w-20 h-20" />
         <p>
