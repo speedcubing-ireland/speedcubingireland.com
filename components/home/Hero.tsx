@@ -1,17 +1,16 @@
-import { faCaretRight, faLocationArrow, faTrophy } from '@fortawesome/free-solid-svg-icons';
+import { faCaretRight, faLocationArrow, faPeopleGroup, faTrophy } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
 import { IRISH_COMPS_URL, WCA_URL } from '../../utils/constants';
 
-export interface HeroComp {
-  id: string;
+export type HeroComp = {
   name: string;
   registration_open: string;
   registration_close: string;
   start_date: string;
   end_date: string;
   city: string;
-}
+} & ({ id: string, series: false } | { series: true });
 
 interface ItemProps {
   title: JSX.Element
@@ -63,13 +62,12 @@ function formatCompDates(comp: HeroComp): string {
   const endMonth = endDate.toLocaleString('default', { month: 'short' });
   const endDay = endDate.getDate();
 
-  let date = `${startMonth} ${startDay}, ${startYear} - ${endMonth} ${endDay}, ${endYear}`;
-  date = `${startMonth} ${startDay}`;
+  let date = `${startMonth} ${startDay}`;
 
   if (startDay === endDay && startMonth === endMonth && startYear === endYear) return `${date}, ${startYear}`;
 
   if (startYear !== endYear) date += `, ${startYear}`;
-  date += ' - ';
+  date += comp.series ? ' & ' : ' - ';
 
   if (startMonth !== endMonth || startYear !== endYear) date += `${endMonth} `;
   date += `${endDay}, ${endYear}`;
@@ -139,12 +137,12 @@ function HeroCard({ comps }: HeroProps) {
 
   const compStat = (comp: HeroComp) => (
     <CardItem
-      key={comp.id}
+      key={comp.name}
       title={getCardTitle(comp)}
-      name={comp.name.slice(0, -4)}
+      name={comp.name.slice(0, -4) + (comp.series ? '(Series)' : '')}
       desc={getCardDesc(comp)}
-      url={`${WCA_URL}/competitions/${comp.id}`}
-      icon={comp.name.includes('Championship') && faTrophy}
+      url={comp.series ? IRISH_COMPS_URL : `${WCA_URL}/competitions/${comp.id}`}
+      icon={(comp.name.includes('Championship') && faTrophy) || comp.series ? faPeopleGroup : undefined}
     />
   );
 
