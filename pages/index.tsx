@@ -15,19 +15,47 @@ import {
   simplifyShopifyProduct,
   SimplifiedProduct,
 } from '../utils/shopify';
+import { Competition } from '../utils/wca-api/types';
+
+function sortComps(comps: Competition[]): HeroComp[] {
+  const heroComps: HeroComp[] = [];
+
+  for (let i = 0; i < Math.min(comps.length, 4); i += 1) {
+    const comp = comps[i];
+    if (!comp.name.includes('Saturday') && !comp.name.includes('Sunday')) {
+      heroComps.push({
+        id: comp.id,
+        name: comp.name,
+        registration_open: comp.registration_open,
+        registration_close: comp.registration_close,
+        start_date: comp.start_date,
+        end_date: comp.end_date,
+        city: comp.city,
+        series: false,
+      });
+    } else {
+      const name = comp.name.replace('Saturday ', '');
+      const nextComp = comps[i += 1];
+
+      heroComps.push({
+        name,
+        registration_open: comp.registration_open,
+        registration_close: nextComp.registration_close,
+        start_date: comp.start_date,
+        end_date: nextComp.end_date,
+        city: comp.city,
+        series: true,
+      });
+    }
+  }
+
+  return heroComps;
+}
 
 export const getStaticProps: GetStaticProps = async () => {
   const comps = await getCompsFromNow();
 
-  const heroComps: HeroComp[] = comps.reverse().slice(0, 4).map((comp) => ({
-    id: comp.id,
-    name: comp.name,
-    registration_open: comp.registration_open,
-    registration_close: comp.registration_close,
-    start_date: comp.start_date,
-    end_date: comp.end_date,
-    city: comp.city,
-  }));
+  const heroComps = sortComps(comps.reverse());
 
   let simplifiedProducts: SimplifiedProduct[] = [];
   const shopifyProducts = session && shopify && await shopify.rest.Product.all({ session });
