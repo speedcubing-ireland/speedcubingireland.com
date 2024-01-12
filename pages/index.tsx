@@ -20,8 +20,10 @@ import { Competition } from '../utils/wca-api/types';
 function sortComps(comps: Competition[]): HeroComp[] {
   const heroComps: HeroComp[] = [];
 
-  for (let i = 0; i < Math.min(comps.length, 4); i += 1) {
+  let actualCompCount = 0;
+  for (let i = 0; actualCompCount < Math.min(comps.length, 4); i += 1) {
     const comp = comps[i];
+    actualCompCount += 1;
     if (!comp.name.includes('Saturday') && !comp.name.includes('Sunday')) {
       heroComps.push({
         id: comp.id,
