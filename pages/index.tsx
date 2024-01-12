@@ -22,6 +22,7 @@ function sortComps(comps: Competition[]): HeroComp[] {
 
   let actualCompCount = 0;
   for (let i = 0; actualCompCount < Math.min(comps.length, 4); i += 1) {
+    if (i >= comps.length) break;
     const comp = comps[i];
     actualCompCount += 1;
     if (!comp.name.includes('Saturday') && !comp.name.includes('Sunday')) {
