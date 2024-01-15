@@ -27,7 +27,7 @@
     "@typescript-eslint/parser": "^5.57.1",
     "@vercel/analytics": "^0.1.10",
     "autoprefixer": "^10.4.13",
-    "daisyui": "2.52.0",
+    "daisyui": "4.6.0",
     "eslint": "8.51.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^17.0.0",
