@@ -65,6 +65,7 @@ export const getStaticProps: GetStaticProps = async () => {
   if (shopifyProducts) {
     simplifiedProducts = shopifyProducts.data
       .filter((product) => product.status === 'active')
+      .filter((product) => product.tags?.includes('website'))
       .map(simplifyShopifyProduct);
   }
 

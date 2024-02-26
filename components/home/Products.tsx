@@ -20,7 +20,7 @@ function ProductCard({ product }: { product: SimplifiedProduct }) {
         />
       </figure>
       <div className="card-body items-center text-center">
-        <h2 className="card-title">{product.title}</h2>
+        <h2 className="card-title">{product.title.split('|')[0]}</h2>
         <p>
           From €
           {product.price}

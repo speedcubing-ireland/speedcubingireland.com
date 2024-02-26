@@ -25,7 +25,7 @@ function Stats() {
       title: 'Solves', value: '110,000+', color: 'text-primary', icon: faStopwatch,
     },
     {
-      title: 'Competitions', value: '45+', color: 'text-secondary', icon: faTrophy,
+      title: 'Competitions', value: '50+', color: 'text-secondary', icon: faTrophy,
     },
   ];
 
