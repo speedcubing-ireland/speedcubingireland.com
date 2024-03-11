@@ -1,4 +1,6 @@
 /** @type {import('next').NextConfig} */
+import mdx from '@next/mdx';
+
 const nextConfig = {
   reactStrictMode: true,
   webpack(config) {
@@ -19,7 +21,7 @@ const nextConfig = {
   },
 };
 
-const withMDX = require('@next/mdx')({
+const withMDX = mdx({
   extension: /\.mdx?$/,
   options: {
     remarkPlugins: [],
@@ -27,4 +29,4 @@ const withMDX = require('@next/mdx')({
   },
 })
 
-module.exports = withMDX(nextConfig);
+export default withMDX(nextConfig);
