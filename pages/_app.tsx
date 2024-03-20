@@ -16,7 +16,7 @@ function ThemeController() {
   const { theme, setTheme } = useTheme();
 
   useEffect(() => {
-    if (!window) return () => {};
+    if (!window) return () => { };
 
     const listener = (e: KeyboardEvent) => {
       if (!theme) return;
