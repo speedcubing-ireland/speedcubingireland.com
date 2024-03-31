@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import Redirecting from '../../components/redirects/Redirecting';
-import { CURRENT_COMP_REVALIDATE_TIME } from '../../utils/constants';
-import { getCurrentCompetition } from '../../utils/wca-api';
-import { getWCALiveCompetitionId } from '../../utils/wca-live';
+import { CURRENT_COMP_REVALIDATE_TIME } from '../../lib/constants';
+import { getCurrentCompetition } from '../../lib/wca-api';
+import { getWCALiveCompetitionId } from '../../lib/wca-live';
 
 async function getRedirectUrl(): Promise<string> {
   const currentComp = await getCurrentCompetition();

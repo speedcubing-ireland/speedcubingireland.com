@@ -3,7 +3,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
-import { IRISH_COMPS_URL, WCA_URL } from '../../utils/constants';
+import { IRISH_COMPS_URL, WCA_URL } from '../../lib/constants';
 
 export type HeroComp = {
   name: string;

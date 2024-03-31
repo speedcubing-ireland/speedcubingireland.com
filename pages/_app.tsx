@@ -6,7 +6,7 @@ import { ThemeProvider, useTheme } from 'next-themes';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { useEffect } from 'react';
 import { GoogleAnalytics } from 'nextjs-google-analytics';
-import { themeData } from '../utils/theme';
+import { themeData } from '../lib/theme';
 
 config.autoAddCss = false;
 

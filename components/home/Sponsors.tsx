@@ -7,8 +7,8 @@ import SILogoDark from '../../public/logos/speedcubing-ireland-logo-dark.svg';
 // import UTwistLogo from '../../public/logos/utwistcubes-logo.png';
 // import UTwistLogoDark from '../../public/logos/utwistcubes-logo-dark.png';
 
-import { useLightDarkOption } from '../../utils/theme';
-// import { WCA_URL } from '../../utils/constants';
+import { useLightDarkOption } from '../../lib/theme';
+// import { WCA_URL } from '../../lib/constants';
 
 interface SponsorData {
   name: string;

@@ -2,9 +2,9 @@ import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import Head from 'next/head';
 import Hero, { HeroComp } from '../components/home/Hero';
 import Socials from '../components/home/Socials';
-import { getCompsFromNow } from '../utils/wca-api';
+import { getCompsFromNow } from '../lib/wca-api';
 import Layout from '../components/layout/Layout';
-import { CURRENT_COMP_REVALIDATE_TIME } from '../utils/constants';
+import { CURRENT_COMP_REVALIDATE_TIME } from '../lib/constants';
 import Sponsors from '../components/home/Sponsors';
 import Stats from '../components/home/Stats';
 import Divider from '../components/home/Divider';
@@ -14,8 +14,8 @@ import {
   session,
   simplifyShopifyProduct,
   SimplifiedProduct,
-} from '../utils/shopify';
-import { Competition } from '../utils/wca-api/types';
+} from '../lib/shopify';
+import { Competition } from '../lib/wca-api/types';
 
 function sortComps(comps: Competition[]): HeroComp[] {
   const heroComps: HeroComp[] = [];

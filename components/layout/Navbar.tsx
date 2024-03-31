@@ -7,10 +7,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { IRISH_COMPS_URL } from '../../utils/constants';
+import { IRISH_COMPS_URL } from '../../lib/constants';
 import Logo from '../../public/logos/speedcubing-ireland-logo.svg';
 import DarkLogo from '../../public/logos/speedcubing-ireland-logo-dark.svg';
-import { isThemeDark } from '../../utils/theme';
+import { isThemeDark } from '../../lib/theme';
 
 function Navbar() {
   const { resolvedTheme, setTheme } = useTheme();

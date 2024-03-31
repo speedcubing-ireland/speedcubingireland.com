@@ -3,8 +3,8 @@ import { faCartArrowDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Image from 'next/image';
 import Link from 'next/link';
-import { SHOPIFY_STORE_URL } from '../../utils/constants';
-import { SimplifiedProduct } from '../../utils/shopify';
+import { SHOPIFY_STORE_URL } from '../../lib/constants';
+import { SimplifiedProduct } from '../../lib/shopify';
 
 function ProductCard({ product }: { product: SimplifiedProduct }) {
   const productLink = `${SHOPIFY_STORE_URL}/products/${product.handle}`;
