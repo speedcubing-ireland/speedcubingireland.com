@@ -1,8 +1,8 @@
-import { github } from '@/lib/auth';
 import { generateState } from 'arctic';
 import { serializeCookie } from 'oslo/cookie';
 
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { wcaClient } from '@/lib/auth';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'GET') {
@@ -10,11 +10,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return;
   }
   const state = generateState();
-  const url = await github.createAuthorizationURL(state);
+  const url = await wcaClient.createAuthorizationURL({
+    state,
+    scopes: ['public'],
+  });
   res
     .setHeader(
       'Set-Cookie',
-      serializeCookie('github_oauth_state', state, {
+      serializeCookie('wca_oauth_state', state, {
         path: '/',
         secure: process.env.NODE_ENV === 'production',
         httpOnly: true,

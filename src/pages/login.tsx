@@ -24,7 +24,7 @@ export default function Page() {
   return (
     <>
       <h1>Sign in</h1>
-      <Link href="/api/login/github">Sign in with GitHub</Link>
+      <Link href="/api/login/wca">Sign in with WCA</Link>
     </>
   );
 }

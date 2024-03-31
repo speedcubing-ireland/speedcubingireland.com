@@ -1,6 +1,5 @@
-import { github, lucia } from '@/lib/auth';
+import { lucia, wcaClient } from '@/lib/auth';
 import { OAuth2RequestError } from 'arctic';
-import { generateId } from 'lucia';
 
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { db, users } from '@/lib/db';
@@ -13,25 +12,32 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
   const code = req.query.code?.toString() ?? null;
   const state = req.query.state?.toString() ?? null;
-  const storedState = req.cookies.github_oauth_state ?? null;
+  const storedState = req.cookies.wca_oauth_state ?? null;
   if (!code || !state || !storedState || state !== storedState) {
     res.status(400).end();
     return;
   }
 
   try {
-    const tokens = await github.validateAuthorizationCode(code);
-    const githubUserResponse = await fetch('https://api.github.com/user', {
+    const tokens = await wcaClient.validateAuthorizationCode(code, {
+      credentials: process.env.WCA_CLIENT_SECRET!,
+    });
+    const wcaUserResponse = await fetch('https://www.worldcubeassociation.org/api/v0/me', {
       headers: {
-        Authorization: `Bearer ${tokens.accessToken}`,
+        Authorization: `Bearer ${tokens.access_token}`,
       },
     });
-    const githubUser: GitHubUser = await githubUserResponse.json();
+
+    const wcaUser = await wcaUserResponse.json() as { me: {
+      id: string,
+      name: string,
+      wca_id: string,
+    } };
 
     const existingUser = (await db
       .select()
       .from(users)
-      .where(eq(users.githubId, githubUser.id))
+      .where(eq(users.id, wcaUser.me.id))
       .limit(1)
       .execute())[0];
 
@@ -39,22 +45,20 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       const session = await lucia.createSession(existingUser.id, {});
       res
         .setHeader('Set-Cookie', lucia.createSessionCookie(session.id).serialize())
-        .redirect('/');
+        .redirect('/example');
       return;
     }
 
-    const userId = generateId(15);
-
     await db.insert(users).values({
-      id: userId,
-      githubId: githubUser.id,
-      username: githubUser.login,
+      id: wcaUser.me.id,
+      name: wcaUser.me.name,
+      wcaId: wcaUser.me.wca_id,
     }).execute();
 
-    const session = await lucia.createSession(userId, {});
+    const session = await lucia.createSession(wcaUser.me.id, {});
     res
       .setHeader('Set-Cookie', lucia.createSessionCookie(session.id).serialize())
-      .redirect('/');
+      .redirect('/example');
   } catch (e) {
     if (e instanceof OAuth2RequestError && e.message === 'bad_verification_code') {
       // invalid code
@@ -63,9 +67,4 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
     res.status(500).end();
   }
-}
-
-interface GitHubUser {
-  id: number;
-  login: string;
 }

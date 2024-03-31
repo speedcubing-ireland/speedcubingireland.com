@@ -1,5 +1,4 @@
 import { useRouter } from 'next/router';
-
 import type {
   GetServerSidePropsContext,
   GetServerSidePropsResult,
@@ -36,14 +35,10 @@ export default function Page({ user }: InferGetServerSidePropsType<typeof getSer
     <>
       <h1>
         Hi,
-        {user.username}
+        {user.name}
         !
       </h1>
-      <p>
-        Your user ID is
-        {user.id}
-        .
-      </p>
+      <code><pre>{JSON.stringify(user, null, 2)}</pre></code>
       <form
         method="post"
         action="/api/logout"

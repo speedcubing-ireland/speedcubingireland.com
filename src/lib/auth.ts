@@ -1,9 +1,20 @@
 import { Lucia, Session, User } from 'lucia';
-import { GitHub } from 'arctic';
 import { IncomingMessage, ServerResponse } from 'http';
-import { adapter } from './db';
+import { OAuth2Client } from 'oslo/oauth2';
+import { InferSelectModel } from 'drizzle-orm';
+import { adapter, users } from './db';
 
-export const github = new GitHub(process.env.GITHUB_CLIENT_ID!, process.env.GITHUB_CLIENT_SECRET!);
+const authorizeEndpoint = 'https://www.worldcubeassociation.org/oauth/authorize';
+const tokenEndpoint = 'https://www.worldcubeassociation.org/oauth/token';
+
+export const wcaClient = new OAuth2Client(
+  process.env.WCA_CLIENT_ID!,
+  authorizeEndpoint,
+  tokenEndpoint,
+  {
+    redirectURI: 'http://localhost:3000/api/login/wca/callback',
+  },
+);
 
 export const lucia = new Lucia(adapter, {
   sessionCookie: {
@@ -12,14 +23,11 @@ export const lucia = new Lucia(adapter, {
       secure: process.env.NODE_ENV === 'production',
     },
   },
-  getUserAttributes: (attributes: DatabaseUserAttributes) => {
-    const { id, githubId, username } = attributes;
-    return {
-      id,
-      githubId,
-      username,
-    };
-  },
+  getUserAttributes: (attributes: DatabaseUserAttributes) => ({
+    id: attributes.id,
+    name: attributes.name,
+    wcaId: attributes.wcaId,
+  }),
 });
 
 declare module 'lucia' {
@@ -28,18 +36,11 @@ declare module 'lucia' {
     DatabaseUserAttributes: DatabaseUserAttributes;
   }
 
-  interface User {
-    id: string;
-    githubId: string;
-    username: string;
+  interface User extends DatabaseUserAttributes {
   }
 }
 
-interface DatabaseUserAttributes {
-  id: string;
-  githubId: number;
-  username: string;
-}
+interface DatabaseUserAttributes extends InferSelectModel<typeof users> {}
 
 export async function validateRequest(
   req: IncomingMessage,
