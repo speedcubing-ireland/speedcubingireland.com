@@ -2,7 +2,7 @@ import {
   faDiscord, faFacebook, faGithub, faInstagram,
 } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import WhiteLogo from '../../public/logos/speedcubing-ireland-logo-white.svg';
+import WhiteLogo from '@/public/logos/speedcubing-ireland-logo-white.svg';
 
 function Footer() {
   return (

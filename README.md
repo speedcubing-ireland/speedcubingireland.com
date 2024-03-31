@@ -36,7 +36,7 @@ Pages are located in the `pages` directory. Each page is a React component expor
 The posts in the pages/posts are generated from the `.mdx` files. A basic post looks like this:
 
 ```md
-import Post from '../../components/posts/Post';
+import Post from '@/components/posts/Post';
 
 # Hello World
 This is where the post content goes.

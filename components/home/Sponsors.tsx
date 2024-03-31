@@ -1,14 +1,14 @@
 import Image, { StaticImageData } from 'next/image';
 import Link from 'next/link';
-import SILogo from '../../public/logos/speedcubing-ireland-logo.svg';
-import SILogoDark from '../../public/logos/speedcubing-ireland-logo-dark.svg';
-// import WCALogo from '../../public/logos/wca-logo.svg';
-// import WCALogoDark from '../../public/logos/wca-logo-dark.svg';
-// import UTwistLogo from '../../public/logos/utwistcubes-logo.png';
-// import UTwistLogoDark from '../../public/logos/utwistcubes-logo-dark.png';
+import SILogo from '@/public/logos/speedcubing-ireland-logo.svg';
+import SILogoDark from '@/public/logos/speedcubing-ireland-logo-dark.svg';
+// import WCALogo from '@/public/logos/wca-logo.svg';
+// import WCALogoDark from '@/public/logos/wca-logo-dark.svg';
+// import UTwistLogo from '@/public/logos/utwistcubes-logo.png';
+// import UTwistLogoDark from '@/public/logos/utwistcubes-logo-dark.png';
 
-import { useLightDarkOption } from '../../lib/theme';
-// import { WCA_URL } from '../../lib/constants';
+import { useLightDarkOption } from '@/lib/theme';
+// import { WCA_URL } from '@/lib/constants';
 
 interface SponsorData {
   name: string;

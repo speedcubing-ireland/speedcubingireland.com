@@ -1,4 +1,4 @@
-import { WCA_API_URL } from '../constants';
+import { WCA_API_URL } from '@/lib/constants';
 import { Competition } from './types';
 
 function getCurrentDate() {

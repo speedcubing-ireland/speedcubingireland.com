@@ -1,14 +1,14 @@
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import Head from 'next/head';
-import Hero, { HeroComp } from '../components/home/Hero';
-import Socials from '../components/home/Socials';
+import Hero, { HeroComp } from '@/components/home/Hero';
+import Socials from '@/components/home/Socials';
 import { getCompsFromNow } from '../lib/wca-api';
-import Layout from '../components/layout/Layout';
+import Layout from '@/components/layout/Layout';
 import { CURRENT_COMP_REVALIDATE_TIME } from '../lib/constants';
-import Sponsors from '../components/home/Sponsors';
-import Stats from '../components/home/Stats';
-import Divider from '../components/home/Divider';
-import Products from '../components/home/Products';
+import Sponsors from '@/components/home/Sponsors';
+import Stats from '@/components/home/Stats';
+import Divider from '@/components/home/Divider';
+import Products from '@/components/home/Products';
 import {
   shopify,
   session,
