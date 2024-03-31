@@ -53,5 +53,13 @@
   "devDependencies": {
     "drizzle-kit": "^0.20.14",
     "eslint-config-next": "^14.1.4"
-  }
+  },
+  "trustedDependencies": [
+    "@fortawesome/fontawesome-common-types",
+    "@fortawesome/fontawesome-svg-core",
+    "@fortawesome/free-brands-svg-icons",
+    "@fortawesome/free-regular-svg-icons",
+    "@fortawesome/free-solid-svg-icons",
+    "es5-ext"
+  ]
 }
