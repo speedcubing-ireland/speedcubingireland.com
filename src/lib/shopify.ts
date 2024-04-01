@@ -1,6 +1,6 @@
 import '@shopify/shopify-api/adapters/node';
-import { shopifyApi, ApiVersion } from '@shopify/shopify-api';
-import { restResources } from '@shopify/shopify-api/rest/admin/2023-01';
+import { shopifyApi, ApiVersion, Shopify } from '@shopify/shopify-api';
+import { RestResources, restResources } from '@shopify/shopify-api/rest/admin/2023-01';
 import { Product } from '@shopify/shopify-api/rest/admin/2023-01/product';
 import { Variant } from '@shopify/shopify-api/rest/admin/2023-01/variant';
 
@@ -27,7 +27,17 @@ export const shopifyStoreURL = process.env.SHOPIFY_HOSTNAME!;
 
 const invalidConfig = !process.env.SHOPIFY_API_KEY || !process.env.SHOPIFY_ADMIN_API_KEY;
 
-export const shopify = invalidConfig ? null : shopifyApi({
+let shopifyTmp: null | Shopify<RestResources> = null;
+if (process.env.NODE_ENV === 'development') {
+  const gt = globalThis as unknown as {
+    shopifyClient?: Shopify<RestResources>;
+  };
+  if (gt.shopifyClient) {
+    shopifyTmp = gt.shopifyClient;
+  }
+}
+
+export const shopify = invalidConfig ? null : shopifyTmp || shopifyApi({
   apiKey: process.env.SHOPIFY_API_KEY!,
   apiSecretKey: process.env.SHOPIFY_ADMIN_API_KEY!,
   apiVersion: ApiVersion.January23,

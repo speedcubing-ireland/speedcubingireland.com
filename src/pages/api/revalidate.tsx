@@ -7,6 +7,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   try {
     await res.revalidate('/', { unstable_onlyGenerated: true });
+    await res.revalidate('/ranks', { unstable_onlyGenerated: true });
 
     return res.json({ revalidated: true });
   } catch (err) {

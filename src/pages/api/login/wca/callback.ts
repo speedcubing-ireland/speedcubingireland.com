@@ -22,6 +22,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const tokens = await wcaClient.validateAuthorizationCode(code, {
       credentials: process.env.WCA_CLIENT_SECRET!,
     });
+
     const wcaUserResponse = await fetch('https://www.worldcubeassociation.org/api/v0/me', {
       headers: {
         Authorization: `Bearer ${tokens.access_token}`,
@@ -45,7 +46,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       const session = await lucia.createSession(existingUser.id, {});
       res
         .setHeader('Set-Cookie', lucia.createSessionCookie(session.id).serialize())
-        .redirect('/example');
+        .redirect('/ranks');
       return;
     }
 
@@ -58,7 +59,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const session = await lucia.createSession(wcaUser.me.id, {});
     res
       .setHeader('Set-Cookie', lucia.createSessionCookie(session.id).serialize())
-      .redirect('/example');
+      .redirect('/ranks');
   } catch (e) {
     if (e instanceof OAuth2RequestError && e.message === 'bad_verification_code') {
       // invalid code

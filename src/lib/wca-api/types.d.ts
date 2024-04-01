@@ -73,3 +73,50 @@ export interface Competition {
   organizers?: User | null;
   class: string;
 }
+
+export interface Person {
+  name: string
+  delegate_status?: string
+  wca_id: string
+  avatar: Avatar
+  gender: string
+  country_iso2: string
+  url: string
+  country: Country
+  class: string
+  teams: Team[]
+  id: string
+  email?: string
+  location?: string
+  region_id?: number
+}
+
+export type Events = '222' | '333' | '444' | '555' | '666' | '777' | '333bf' | '333fm' | '333ft' | '333mbf' | '333oh' | '444bf' | 'clock' | 'minx' | 'pyram' | 'skewb' | 'sq1' | '555bf';
+
+export interface RankDetail {
+  best: number
+  world_rank: number
+  continent_rank: number
+  country_rank: number
+}
+
+export interface MultiplePerson {
+  person: Person
+  competition_count: number
+  personal_records: Record<Events, {
+    single?: RankDetail
+    average?: RankDetail
+  }>;
+  medals: {
+    gold: number
+    silver: number
+    bronze: number
+    total: number
+  }
+  records: {
+    national: number
+    continental: number
+    world: number
+    total: number
+  }
+}

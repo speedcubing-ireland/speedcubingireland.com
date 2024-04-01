@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */ // daisyUI uses tabIndex
 import {
-  faAward, faBars, faBolt, faCircleInfo, faHome, faMoon, faSun,
+  faAward, faBars, faBolt, faCircleInfo, faHome, faMoon, faRankingStar, faSun,
 } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -58,6 +58,11 @@ function Navbar() {
       text: 'Competitions',
       icon: faAward,
       url: IRISH_COMPS_URL,
+    },
+    {
+      text: 'SI Rankings',
+      icon: faRankingStar,
+      url: '/ranks',
     },
     {
       text: 'About',

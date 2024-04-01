@@ -56,6 +56,15 @@ function sortComps(comps: Competition[]): HeroComp[] {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
+  if (process.env.SKIP_HOMEPAGE) {
+    return {
+      props: {
+        comps: [],
+        products: [],
+      },
+    };
+  }
+
   const comps = await getCompsFromNow();
 
   const heroComps = sortComps(comps.reverse());

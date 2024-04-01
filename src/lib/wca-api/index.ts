@@ -1,5 +1,5 @@
 import { WCA_API_URL } from '@/lib/constants';
-import { Competition } from './types';
+import { Competition, MultiplePerson } from './types';
 
 function getCurrentDate() {
   if (process.env.NODE_ENV === 'development') {
@@ -14,6 +14,14 @@ export function dateInDays(days: number): Date {
 
 export function formatDate(date: Date): string {
   return date.toISOString().split('T')[0];
+}
+
+export async function getPersons(wcaIds: string[]): Promise<MultiplePerson[]> {
+  const searchParams = new URLSearchParams({ wca_ids: wcaIds.join(',') });
+  const reqUrl = `${WCA_API_URL}/persons?${searchParams.toString()}`;
+  const res = await fetch(reqUrl);
+  if (!res.ok) return [];
+  return res.json();
 }
 
 export async function searchCompetitions(options: Record<string, string>): Promise<Competition[]> {
