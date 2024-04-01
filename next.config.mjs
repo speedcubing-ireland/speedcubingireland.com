@@ -19,6 +19,7 @@ const nextConfig = {
   experimental: {
     mdxRs: true,
   },
+  largePageDataBytes: 512000,
 };
 
 const withMDX = mdx({

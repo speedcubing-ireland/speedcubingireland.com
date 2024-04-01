@@ -5,6 +5,7 @@ import { GetStaticPaths, InferGetStaticPropsType } from 'next';
 import { db, users } from '@/lib/db';
 import { and, eq, isNotNull } from 'drizzle-orm';
 import { getPersons } from '@/lib/wca-api';
+import { SimplfyData } from '@/lib/ranks';
 
 export const getStaticPaths = (async () => {
   const provinces = Object.keys(counties).map((province) => province.toLowerCase());
@@ -22,7 +23,7 @@ export const getStaticProps = (async ({ params }: { params: { region: string } }
   const { region } = params;
 
   const ids = await db
-    .select({ wcaId: users.wcaId, county: users.county })
+    .select()
     .from(users)
     .where(and(isNotNull(users.county), eq(users.visible, true)))
     .execute();
@@ -45,7 +46,7 @@ export const getStaticProps = (async ({ params }: { params: { region: string } }
   return {
     props: {
       region,
-      data,
+      data: SimplfyData(data, ids),
     },
     revalidate: 60 * 60 * 24,
   };
