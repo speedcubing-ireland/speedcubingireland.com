@@ -15,7 +15,7 @@ export default function Document() {
         <link rel="manifest" href="/site.webmanifest" />
         <meta name="theme-color" content="#ffffff" />
       </Head>
-      <body>
+      <body className="bg-neutral min-h-screen">
         <Main />
         <NextScript />
       </body>

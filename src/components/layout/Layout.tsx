@@ -10,7 +10,6 @@ interface LayoutProps {
 function Layout({ title, children }: LayoutProps) {
   const pageTitle = title ? `${title} | Speedcubing Ireland` : 'Speedcubing Ireland';
 
-  // TODO: add proper meta tags
   return (
     <>
       <Head>
@@ -18,7 +17,7 @@ function Layout({ title, children }: LayoutProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
+      <main className="bg-base-100">
         <Navbar />
         {children}
         <Footer />

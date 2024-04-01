@@ -17,8 +17,16 @@ export function formatDate(date: Date): string {
 }
 
 export async function getPersons(wcaIds: string[]): Promise<MultiplePerson[]> {
+  if (wcaIds.length === 0) return [];
   const searchParams = new URLSearchParams({ wca_ids: wcaIds.join(',') });
   const reqUrl = `${WCA_API_URL}/persons?${searchParams.toString()}`;
+  const res = await fetch(reqUrl);
+  if (!res.ok) return [];
+  return res.json();
+}
+
+export async function getPersonComps(wcaId: string): Promise<Competition[]> {
+  const reqUrl = `${WCA_API_URL}/persons/${wcaId}/competitions`;
   const res = await fetch(reqUrl);
   if (!res.ok) return [];
   return res.json();

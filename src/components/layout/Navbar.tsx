@@ -22,10 +22,8 @@ function Navbar() {
   useEffect(() => setMounted(true), []);
 
   const themeButton = (classes: string) => {
-    if (!mounted) return undefined;
-
     const icon = isDark ? faSun : faMoon;
-    const handleThemeChange = () => setTheme(isDark ? 'emerald' : 'forest');
+    const handleThemeChange = mounted ? () => setTheme(isDark ? 'emerald' : 'forest') : undefined;
 
     return (
       <li className={classes}>
@@ -63,13 +61,19 @@ function Navbar() {
       text: 'SI Rankings',
       icon: faRankingStar,
       url: '/ranks',
+      includeSubpath: true,
     },
     {
       text: 'About',
       icon: faCircleInfo,
       url: '/posts/about',
     },
-  ].filter((item) => router.pathname !== item.url);
+  ].filter((item) => {
+    if (item.includeSubpath) {
+      return !router.pathname.startsWith(item.url);
+    }
+    return router.pathname !== item.url;
+  });
 
   const navbarListItems = (classes: string) => navbarItems.map((item) => (
     <li className={classes} key={item.text}>

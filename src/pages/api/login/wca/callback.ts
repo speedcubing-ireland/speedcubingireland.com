@@ -4,6 +4,7 @@ import { OAuth2RequestError } from 'arctic';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { db, users } from '@/lib/db';
 import { eq } from 'drizzle-orm';
+import { getPersonComps } from '@/lib/wca-api';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'GET') {
@@ -14,7 +15,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const state = req.query.state?.toString() ?? null;
   const storedState = req.cookies.wca_oauth_state ?? null;
   if (!code || !state || !storedState || state !== storedState) {
-    res.status(400).end();
+    res.status(400).redirect('/ranks/account').end();
     return;
   }
 
@@ -46,26 +47,32 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       const session = await lucia.createSession(existingUser.id, {});
       res
         .setHeader('Set-Cookie', lucia.createSessionCookie(session.id).serialize())
-        .redirect('/ranks');
+        .redirect('/ranks/account');
       return;
     }
+
+    const comps = await getPersonComps(wcaUser.me.wca_id);
+    const beenToComp = comps.some((comp) => comp.country_iso2 === 'IE'
+      || (comp.country_iso2 === 'GB' && comp.city.includes('County')));
 
     await db.insert(users).values({
       id: wcaUser.me.id,
       name: wcaUser.me.name,
       wcaId: wcaUser.me.wca_id,
+      visible: true,
+      beenToComp,
     }).execute();
 
     const session = await lucia.createSession(wcaUser.me.id, {});
     res
       .setHeader('Set-Cookie', lucia.createSessionCookie(session.id).serialize())
-      .redirect('/ranks');
+      .redirect('/ranks/account');
   } catch (e) {
     if (e instanceof OAuth2RequestError && e.message === 'bad_verification_code') {
       // invalid code
-      res.status(400).end();
+      res.status(400).redirect('/ranks/account').end();
       return;
     }
-    res.status(500).end();
+    res.status(500).redirect('/ranks/account').end();
   }
 }

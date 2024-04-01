@@ -4,6 +4,9 @@ export const users = sqliteTable('user', {
   id: text('id').notNull().primaryKey(),
   name: text('name').notNull(),
   wcaId: text('wca_id').notNull().unique(),
+  county: text('county'),
+  visible: int('visible', { mode: 'boolean' }).default(true).notNull(),
+  beenToComp: int('been_to_comp', { mode: 'boolean' }).default(false).notNull(),
 });
 
 export const sessions = sqliteTable('session', {

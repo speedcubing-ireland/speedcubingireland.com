@@ -65,18 +65,19 @@ export const getStaticProps: GetStaticProps = async () => {
     };
   }
 
-  const comps = await getCompsFromNow();
-
-  const heroComps = sortComps(comps.reverse());
-
   let simplifiedProducts: SimplifiedProduct[] = [];
-  const shopifyProducts = session && shopify && (await shopify.rest.Product.all({ session }));
+  const [comps, shopifyProducts] = await Promise.all([
+    getCompsFromNow(),
+    session && shopify && shopify.rest.Product.all({ session }),
+  ]);
   if (shopifyProducts) {
     simplifiedProducts = shopifyProducts.data
       .filter((product) => product.status === 'active')
       .filter((product) => product.tags?.includes('website'))
       .map(simplifyShopifyProduct);
   }
+
+  const heroComps = sortComps(comps.reverse());
 
   return {
     props: {

@@ -3,7 +3,7 @@ import {
 } from 'lucia';
 import { OAuth2Client } from 'oslo/oauth2';
 import { InferSelectModel } from 'drizzle-orm';
-import { NextRequest, NextResponse } from 'next/server';
+import { IncomingMessage, ServerResponse } from 'http';
 import { adapter, users } from './db';
 
 const authorizeEndpoint = 'https://www.worldcubeassociation.org/oauth/authorize';
@@ -30,6 +30,9 @@ export const lucia = new Lucia(adapter, {
     id: attributes.id,
     name: attributes.name,
     wcaId: attributes.wcaId,
+    county: attributes.county,
+    visible: attributes.visible,
+    beenToComp: attributes.beenToComp,
   }),
 });
 
@@ -46,10 +49,10 @@ declare module 'lucia' {
 interface DatabaseUserAttributes extends InferSelectModel<typeof users> {}
 
 export async function validateRequest(
-  req: NextRequest,
-  res: NextResponse,
+  req: IncomingMessage,
+  res: ServerResponse,
 ): Promise<{ user: User; session: Session } | { user: null; session: null }> {
-  const sessionId = lucia.readSessionCookie(req.cookies.get('session')?.value ?? '');
+  const sessionId = lucia.readSessionCookie(req.headers.cookie ?? '');
   if (!sessionId) {
     return {
       user: null,
@@ -58,10 +61,10 @@ export async function validateRequest(
   }
   const result = await lucia.validateSession(sessionId);
   if (result.session && result.session.fresh) {
-    res.cookies.set('session', lucia.createSessionCookie(result.session.id).serialize());
+    res.setHeader('Set-Cookie', lucia.createSessionCookie(result.session.id).serialize());
   }
   if (!result.session) {
-    res.cookies.set('session', lucia.createBlankSessionCookie().serialize());
+    res.setHeader('Set-Cookie', lucia.createBlankSessionCookie().serialize());
   }
   return result;
 }
