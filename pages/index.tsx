@@ -38,7 +38,7 @@ function sortComps(comps: Competition[]): HeroComp[] {
       });
     } else {
       const name = comp.name.replace('Saturday ', '');
-      const nextComp = comps[i += 1];
+      const nextComp = comps[(i += 1)];
 
       heroComps.push({
         name,
@@ -61,7 +61,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const heroComps = sortComps(comps.reverse());
 
   let simplifiedProducts: SimplifiedProduct[] = [];
-  const shopifyProducts = session && shopify && await shopify.rest.Product.all({ session });
+  const shopifyProducts = session && shopify && (await shopify.rest.Product.all({ session }));
   if (shopifyProducts) {
     simplifiedProducts = shopifyProducts.data
       .filter((product) => product.status === 'active')
@@ -86,7 +86,10 @@ export default function Home({
     <Layout>
       <Head>
         <title>Speedcubing Ireland</title>
-        <meta name="description" content="Speedcubing Ireland aims to support the growth of the Irish speedcubing community by provide information about cubing and organising WCA competitions." />
+        <meta
+          name="description"
+          content="Speedcubing Ireland aims to support the growth of the Irish speedcubing community by provide information about cubing and organising WCA competitions."
+        />
       </Head>
       <Hero comps={comps} />
       <Stats />
