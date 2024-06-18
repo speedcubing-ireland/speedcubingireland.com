@@ -3,6 +3,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { IRISH_COMPS_URL, WCA_URL } from '../../utils/constants';
 
 export type HeroComp = {
@@ -138,8 +139,12 @@ function HeroCard({ comps }: HeroProps) {
   }
 
   const compStat = (comp: HeroComp) => {
-    const compName = (comp.name.slice(0, -4) + (comp.series ? '(Series)' : '')).replace("Kilkenny Cats", "Cats");
-    
+    const compName = (comp.name.slice(0, -4) + (comp.series ? '(Series)' : '')).replace('Kilkenny Cats', 'Cats');
+
+    let icon: IconProp;
+    if (comp.series) icon = faPeopleGroup;
+    if (comp.name.includes('Championship')) icon = faTrophy;
+
     return (
       <CardItem
         key={comp.name}
@@ -147,7 +152,7 @@ function HeroCard({ comps }: HeroProps) {
         name={compName}
         desc={getCardDesc(comp)}
         url={comp.series ? IRISH_COMPS_URL : `${WCA_URL}/competitions/${comp.id}`}
-        icon={comp.name.includes('Championship') ? faTrophy : comp.series ? faPeopleGroup : undefined}
+        icon={icon}
       />
     )
   };
