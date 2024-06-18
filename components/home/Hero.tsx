@@ -141,7 +141,7 @@ function HeroCard({ comps }: HeroProps) {
   const compStat = (comp: HeroComp) => {
     const compName = (comp.name.slice(0, -4) + (comp.series ? '(Series)' : '')).replace('Kilkenny Cats', 'Cats');
 
-    let icon: IconProp | undefined = undefined;
+    let icon: IconProp | undefined;
     if (comp.series) icon = faPeopleGroup;
     if (comp.name.includes('Championship')) icon = faTrophy;
 
@@ -154,7 +154,7 @@ function HeroCard({ comps }: HeroProps) {
         url={comp.series ? IRISH_COMPS_URL : `${WCA_URL}/competitions/${comp.id}`}
         icon={icon}
       />
-    )
+    );
   };
 
   return (
