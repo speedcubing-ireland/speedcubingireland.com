@@ -137,16 +137,20 @@ function HeroCard({ comps }: HeroProps) {
     );
   }
 
-  const compStat = (comp: HeroComp) => (
-    <CardItem
-      key={comp.name}
-      title={getCardTitle(comp)}
-      name={comp.name.slice(0, -4) + (comp.series ? '(Series)' : '')}
-      desc={getCardDesc(comp)}
-      url={comp.series ? IRISH_COMPS_URL : `${WCA_URL}/competitions/${comp.id}`}
-      icon={(comp.name.includes('Championship') && faTrophy) || comp.series ? faPeopleGroup : undefined}
-    />
-  );
+  const compStat = (comp: HeroComp) => {
+    const compName = (comp.name.slice(0, -4) + (comp.series ? '(Series)' : '')).replace("Kilkenny Cats", "Cats");
+    
+    return (
+      <CardItem
+        key={comp.name}
+        title={getCardTitle(comp)}
+        name={compName}
+        desc={getCardDesc(comp)}
+        url={comp.series ? IRISH_COMPS_URL : `${WCA_URL}/competitions/${comp.id}`}
+        icon={comp.name.includes('Championship') ? faTrophy : comp.series ? faPeopleGroup : undefined}
+      />
+    )
+  };
 
   return (
     <Card>
