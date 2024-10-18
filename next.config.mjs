@@ -19,6 +19,13 @@ const nextConfig = {
   experimental: {
     mdxRs: true,
   },
+  async redirects() {
+    return [{
+        source: '/fmc-europe-24',
+        destination: 'https://buy.stripe.com/28o2albL3gAX5Ve9AF',
+        permanent: true,
+    }]
+  }
 };
 
 const withMDX = mdx({
