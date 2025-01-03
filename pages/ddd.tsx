@@ -72,7 +72,6 @@ export async function getResults(): Promise<{
   const res = await req.json() as Data;
 
   const results: { [key: string]: Result } = {};
-  console.log(res);
   res.data.competition.competitionEvents.forEach((event) => {
     event.rounds.forEach((round) => {
       round.results.forEach((result) => {
