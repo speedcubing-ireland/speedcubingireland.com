@@ -18,9 +18,10 @@ function Layout({ title, children }: LayoutProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
+      <main className="flex flex-col min-h-screen">
         <Navbar />
         {children}
+        <div className="flex-1" />
         <Footer />
       </main>
     </>
