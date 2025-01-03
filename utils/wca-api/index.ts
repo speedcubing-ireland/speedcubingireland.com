@@ -1,4 +1,4 @@
-import { WCA_API_URL, WCA_URL } from '../constants';
+import { WCA_API_URL } from '../constants';
 import { Competition } from './types';
 
 function getCurrentDate() {
@@ -24,13 +24,6 @@ export async function searchCompetitions(options: Record<string, string>): Promi
   return res.json();
 }
 
-async function compById(id: string) {
-  const reqUrl = `${WCA_API_URL}/competitions/${id}`;
-  const res = await fetch(reqUrl);
-  if (!res.ok) return [];
-  return res.json();
-}
-
 export async function getCompsFromNow(): Promise<Competition[]> {
   const comps = await searchCompetitions({
     country_iso2: 'IE',
@@ -44,17 +37,12 @@ export async function getCompsFromNow(): Promise<Competition[]> {
     sort: ['start_date'].join(','),
   });
 
-  const fmc = await compById('FMCEurope2024');
-  if (fmc) {
-    fmc.city = 'Dublin';
-  }
-
   const niComps = ukComps.filter((comp) => comp.city.includes('County'));
 
   const today = getCurrentDate();
   today.setHours(0, 0, 0, 0);
 
-  return [...comps, ...niComps, fmc].filter((comp) => {
+  return [...comps, ...niComps].filter((comp) => {
     if (!comp) return false;
     const compDate = new Date(comp.end_date);
     return compDate >= today;
