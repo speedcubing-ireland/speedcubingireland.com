@@ -13,10 +13,6 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(process.env.KIDS_LINK!, 302);
   }
 
-  if (request.nextUrl.pathname.endsWith('/link/youths')) {
-    return NextResponse.redirect(process.env.YOUTHS_LINK!, 302);
-  }
-
   if (request.nextUrl.pathname.endsWith('/link/adults')) {
     return NextResponse.redirect(process.env.ADULTS_LINK!, 302);
   }
