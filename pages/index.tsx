@@ -10,10 +10,7 @@ import Stats from '../components/home/Stats';
 import Divider from '../components/home/Divider';
 import Products from '../components/home/Products';
 import {
-  shopify,
-  session,
-  simplifyShopifyProduct,
-  SimplifiedProduct,
+  fetchProducts,
 } from '../utils/shopify';
 import { Competition } from '../utils/wca-api/types';
 
@@ -60,14 +57,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
   const heroComps = sortComps(comps.reverse());
 
-  let simplifiedProducts: SimplifiedProduct[] = [];
-  const shopifyProducts = session && shopify && (await shopify.rest.Product.all({ session }));
-  if (shopifyProducts) {
-    simplifiedProducts = shopifyProducts.data
-      .filter((product) => product.status === 'active')
-      .filter((product) => product.tags?.includes('website'))
-      .map(simplifyShopifyProduct);
-  }
+  const simplifiedProducts = await fetchProducts();
 
   return {
     props: {
