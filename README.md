@@ -5,7 +5,7 @@
 This is the repo which runs [speedcubingireland.com](https://speedcubingireland.com/).
 
 ## Getting Started
-Firstly, make sure you have git, a recent version of [Node.js](https://nodejs.org/en/), and [Yarn](https://yarnpkg.com/) installed. You can also use a github codespace to get started.
+Firstly, make sure you have git, a recent version of [Node.js](https://nodejs.org/en/), and [Bun](https://bun.com/) installed. You can also use a github codespace to get started.
 
 To clone and enter the repo, run:
 
@@ -17,7 +17,7 @@ cd speedcubingireland.com
 Then, install the dependencies:
 
 ```bash
-yarn install
+bun install
 ```
 
 You will need to set up a `.env` file in the root directory. You can use the `.env.example` file as a template.
@@ -25,7 +25,7 @@ You will need to set up a `.env` file in the root directory. You can use the `.e
 To run the development server, run:
 
 ```bash
-yarn dev
+bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
