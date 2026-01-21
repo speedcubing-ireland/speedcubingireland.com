@@ -17,6 +17,7 @@ function Stat(title: string, value: string, color: string, icon: any) {
 }
 
 function Stats() {
+  // See  ../../docs/STATS.MD to work out how to get those stats
   const stats = [
     {
       title: 'Competitors', value: '1,750+', color: 'text-secondary', icon: faPeopleGroup,
