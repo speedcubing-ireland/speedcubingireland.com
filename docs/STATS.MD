@@ -14,13 +14,13 @@ WHERE country_id ='Ireland' AND results_submitted_at IS NOT NULL
 ```sql
 SELECT SUM(non_zero_count) FROM (
   SELECT
-    ( -- Added opening parenthesis here
+    (
       CASE WHEN value1 <> 0 THEN 1 ELSE 0 END +
       CASE WHEN value2 <> 0 THEN 1 ELSE 0 END +
       CASE WHEN value3 <> 0 THEN 1 ELSE 0 END +
       CASE WHEN value4 <> 0 THEN 1 ELSE 0 END +
       CASE WHEN value5 <> 0 THEN 1 ELSE 0 END
-    ) AS non_zero_count -- Closing parenthesis now matches
+    ) AS non_zero_count
   FROM results r 
   JOIN competitions c
     ON r.competition_id = c.id
