@@ -17,15 +17,16 @@ function Stat(title: string, value: string, color: string, icon: any) {
 }
 
 function Stats() {
+  // See  ../../docs/STATS.MD to work out how to get those stats
   const stats = [
     {
-      title: 'Competitors', value: '1,150+', color: 'text-secondary', icon: faPeopleGroup,
+      title: 'Competitors', value: '1,750+', color: 'text-secondary', icon: faPeopleGroup,
     },
     {
-      title: 'Solves', value: '110,000+', color: 'text-primary', icon: faStopwatch,
+      title: 'Solves', value: '270,000+', color: 'text-primary', icon: faStopwatch,
     },
     {
-      title: 'Competitions', value: '50+', color: 'text-secondary', icon: faTrophy,
+      title: 'Competitions', value: '85+', color: 'text-secondary', icon: faTrophy,
     },
   ];
 
