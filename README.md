@@ -30,6 +30,26 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+### Testing
+
+To run tests in watch mode:
+
+```bash
+bun test
+```
+
+To run tests once:
+
+```bash
+bun test:run
+```
+
+To run tests with coverage report:
+
+```bash
+bun test:coverage
+```
+
 ### Pages
 
 Pages are located in the `pages` directory. Each page is a React component exported from a `.tsx` file.
