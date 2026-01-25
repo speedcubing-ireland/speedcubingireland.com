@@ -52,7 +52,7 @@ interface HeroProps {
   comps: HeroComp[];
 }
 
-function formatCompDates(comp: HeroComp): string {
+export function formatCompDates(comp: HeroComp): string {
   const startDate = new Date(comp.start_date);
   const endDate = new Date(comp.end_date);
 
