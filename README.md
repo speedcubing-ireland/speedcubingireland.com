@@ -32,23 +32,20 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ### Testing
 
+This project uses [Vitest](https://vitest.dev/) for testing. Use `bun run` to execute the npm scripts, as `bun test` invokes Bun's native test runner which is incompatible with Vitest APIs.
+
 To run tests in watch mode:
 
 ```bash
-bun test
+bun run test
 ```
 
 To run tests once:
 
 ```bash
-bun test:run
+bun run test:run
 ```
 
-To run tests with coverage report:
-
-```bash
-bun test:coverage
-```
 
 ### Pages
 
