@@ -14,7 +14,7 @@ import {
 } from '../utils/shopify';
 import { Competition } from '../utils/wca-api/types';
 
-function sortComps(comps: Competition[]): HeroComp[] {
+export function sortComps(comps: Competition[]): HeroComp[] {
   const heroComps: HeroComp[] = [];
 
   let actualCompCount = 0;
