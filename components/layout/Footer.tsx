@@ -17,7 +17,7 @@ function Footer() {
             {' '}
             Developed by
             {' '}
-            <span className="font-bold">Simon Kelly</span>
+            <span className="font-bold">Speedcubing Ireland's Software Team</span>
           </a>
         </p>
       </div>
