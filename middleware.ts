@@ -12,9 +12,14 @@ export function middleware(request: NextRequest) {
   if (request.nextUrl.pathname.endsWith('/link/kids')) {
     return NextResponse.redirect(process.env.KIDS_LINK!, 302);
   }
-
-  if (request.nextUrl.pathname.endsWith('/link/adults')) {
-    return NextResponse.redirect(process.env.ADULTS_LINK!, 302);
+  if (request.nextUrl.pathname.endsWith('/link/youths')) {
+    return NextResponse.redirect(process.env.YOUTH_LINK!, 302);
+  }
+  if (request.nextUrl.pathname.endsWith('/link/women')) {
+    return NextResponse.redirect(process.env.WOMEN_LINK!, 302);
+  }
+  if (request.nextUrl.pathname.endsWith('/link/unisex')) {
+    return NextResponse.redirect(process.env.UNISEX_LINK!, 302);
   }
 
   return NextResponse.next();
