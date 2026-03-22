@@ -24,6 +24,30 @@ export async function searchCompetitions(options: Record<string, string>): Promi
   return res.json();
 }
 
+const NI_COUNTIES = [
+  'County Antrim',
+  'County Armagh',
+  'County Down',
+  'County Fermanagh',
+  'County Londonderry',
+  'County Tyrone',
+];
+
+const NI_COUNTY_PARTS = new Set(
+  NI_COUNTIES.flatMap((county) => {
+    const countyLower = county.toLowerCase();
+    return [countyLower, countyLower.replace(/^county\s+/, '')];
+  }),
+);
+
+function isNorthernIrelandCity(city: string): boolean {
+  return city
+    .toLowerCase()
+    .split(',')
+    .map((part) => part.trim())
+    .some((part) => NI_COUNTY_PARTS.has(part));
+}
+
 export async function getCompsFromNow(): Promise<Competition[]> {
   const comps = await searchCompetitions({
     country_iso2: 'IE',
@@ -37,7 +61,7 @@ export async function getCompsFromNow(): Promise<Competition[]> {
     sort: ['start_date'].join(','),
   });
 
-  const niComps = ukComps.filter((comp) => comp.city.includes('County'));
+  const niComps = ukComps.filter((comp) => isNorthernIrelandCity(comp.city));
 
   const today = getCurrentDate();
   today.setHours(0, 0, 0, 0);
