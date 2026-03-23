@@ -14,6 +14,7 @@ export default function Document() {
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <link rel="manifest" href="/site.webmanifest" />
         <meta name="theme-color" content="#ffffff" />
+        <link rel="stylesheet" href="https://use.typekit.net/gzg1pzk.css" />
       </Head>
       <body>
         <Main />

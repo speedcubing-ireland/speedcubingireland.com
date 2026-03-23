@@ -9,6 +9,7 @@ import Sponsors from '../components/home/Sponsors';
 import Stats from '../components/home/Stats';
 import Divider from '../components/home/Divider';
 import Products from '../components/home/Products';
+import IrishChampionshipHero from '../components/home/IrishChampionshipHero';
 import {
   fetchProducts,
 } from '../utils/shopify';
@@ -81,6 +82,7 @@ export default function Home({
           content="Speedcubing Ireland aims to support the growth of the Irish speedcubing community by provide information about cubing and organising WCA competitions."
         />
       </Head>
+      <IrishChampionshipHero />
       <Hero comps={comps} />
       <Stats />
       <Divider />
