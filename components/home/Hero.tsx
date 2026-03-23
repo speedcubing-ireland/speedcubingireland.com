@@ -93,7 +93,7 @@ function CompItem({ comp, index }: { comp: HeroComp; index: number }) {
   return (
     <Link
       href={url}
-      className={`flex items-start gap-4 p-4 border border-base-content/20 hover:border-base-content/20 hover:bg-base-200`}
+      className="flex items-start gap-4 p-4 border border-base-content/20 hover:bg-base-200"
     >
       <div className={`w-1 self-stretch rounded-full shrink-0 ${accent}`} />
       <div className="flex-1 min-w-0">
