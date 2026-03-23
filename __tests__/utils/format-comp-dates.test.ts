@@ -1,6 +1,35 @@
 import { describe, it, expect } from 'vitest';
 import { formatCompDates, HeroComp } from '../../components/home/Hero';
 
+function createMockHeroComp(overrides: Partial<HeroComp> & { series?: boolean } = {}): HeroComp {
+  const { series = false, ...rest } = overrides;
+
+  if (series) {
+    return {
+      name: 'Test Competition 2024',
+      registration_open: '2024-01-01',
+      registration_close: '2024-03-01',
+      start_date: '2024-03-20',
+      end_date: '2024-03-21',
+      city: 'Dublin',
+      series: true,
+      ...rest,
+    } as HeroComp;
+  }
+
+  return {
+    id: 'TestComp2024',
+    name: 'Test Competition 2024',
+    registration_open: '2024-01-01',
+    registration_close: '2024-03-01',
+    start_date: '2024-03-20',
+    end_date: '2024-03-21',
+    city: 'Dublin',
+    series: false,
+    ...rest,
+  } as HeroComp;
+}
+
 describe('formatCompDates', () => {
   it('formats single day event', () => {
     const comp = createMockHeroComp({
@@ -82,32 +111,3 @@ describe('formatCompDates', () => {
     expect(result).toBe('Dec 30, 2023 & Jan 6, 2024');
   });
 });
-
-function createMockHeroComp(overrides: Partial<HeroComp> & { series?: boolean } = {}): HeroComp {
-  const { series = false, ...rest } = overrides;
-
-  if (series) {
-    return {
-      name: 'Test Competition 2024',
-      registration_open: '2024-01-01',
-      registration_close: '2024-03-01',
-      start_date: '2024-03-20',
-      end_date: '2024-03-21',
-      city: 'Dublin',
-      series: true,
-      ...rest,
-    } as HeroComp;
-  }
-
-  return {
-    id: 'TestComp2024',
-    name: 'Test Competition 2024',
-    registration_open: '2024-01-01',
-    registration_close: '2024-03-01',
-    start_date: '2024-03-20',
-    end_date: '2024-03-21',
-    city: 'Dublin',
-    series: false,
-    ...rest,
-  } as HeroComp;
-}

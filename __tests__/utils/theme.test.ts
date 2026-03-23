@@ -3,11 +3,11 @@ import { isThemeDark, themeData } from '../../utils/theme';
 
 describe('isThemeDark', () => {
   it('returns true for "dark" theme', () => {
-    expect(isThemeDark('dark')).toBe(true);
+    expect(isThemeDark('speedcubing-dark')).toBe(true);
   });
 
   it('returns false for "light" theme', () => {
-    expect(isThemeDark('light')).toBe(false);
+    expect(isThemeDark('speedcubing')).toBe(false);
   });
 
   it('returns false for undefined', () => {
@@ -25,42 +25,15 @@ describe('isThemeDark', () => {
 
 describe('themeData', () => {
   const darkThemes = [
-    'dark',
-    'synthwave',
-    'halloween',
-    'forest',
-    'aqua',
-    'black',
-    'luxury',
-    'dracula',
-    'business',
-    'night',
-    'coffee',
+    'speedcubing-dark',
   ];
 
   const lightThemes = [
-    'light',
-    'cupcake',
-    'bumblebee',
-    'emerald',
-    'corporate',
-    'retro',
-    'cyberpunk',
-    'valentine',
-    'garden',
-    'lofi',
-    'pastel',
-    'fantasy',
-    'wireframe',
-    'cmyk',
-    'autumn',
-    'acid',
-    'lemonade',
-    'winter',
+    'speedcubing',
   ];
 
-  it('has 29 themes', () => {
-    expect(themeData).toHaveLength(29);
+  it('has 2 themes', () => {
+    expect(themeData).toHaveLength(2);
   });
 
   it.each(darkThemes)('marks %s as dark', (themeName) => {
@@ -76,8 +49,6 @@ describe('themeData', () => {
   });
 
   it('isThemeDark returns correct value for all themes', () => {
-    for (const theme of themeData) {
-      expect(isThemeDark(theme.name)).toBe(theme.dark);
-    }
+    themeData.forEach((theme) => expect(isThemeDark(theme.name)).toBe(theme.dark));
   });
 });

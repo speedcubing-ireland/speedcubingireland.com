@@ -76,7 +76,7 @@ function IrishChampionshipHero() {
             >
               <Image
                 src={IC26Logo}
-                alt="Irish Championship 2026 – 24 to 26 July, SETU Arena, Waterford"
+                alt="Irish Championship 2026 - 24 to 26 July, SETU Arena, Waterford"
                 className="w-52 sm:w-60 md:w-64 lg:w-[300px]"
                 priority
               />
@@ -100,7 +100,7 @@ function IrishChampionshipHero() {
                     icon={faCalendarDays}
                     className="w-3.5 text-white"
                   />
-                  24–26 July 2026
+                  24-26 July 2026
                 </span>
                 <span className="flex items-center gap-2">
                   <FontAwesomeIcon

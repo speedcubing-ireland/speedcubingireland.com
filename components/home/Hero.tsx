@@ -36,7 +36,7 @@ export function formatCompDates(comp: HeroComp): string {
   if (startDay === endDay && startMonth === endMonth && startYear === endYear) return `${date}, ${startYear}`;
 
   if (startYear !== endYear) date += `, ${startYear}`;
-  date += comp.series ? ' & ' : ' – ';
+  date += comp.series ? ' & ' : ' - ';
 
   if (startMonth !== endMonth || startYear !== endYear) date += `${endMonth} `;
   date += `${endDay}, ${endYear}`;
