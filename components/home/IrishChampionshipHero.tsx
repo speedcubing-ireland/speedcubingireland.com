@@ -122,7 +122,7 @@ function IrishChampionshipHero() {
             <SellingPoint
               bg="bg-cube-blue"
               icon={faCubesStacked}
-              text="Newcomers welcome! Meet other cubers and set personal records!"
+              text="Newcomers welcome! Meet other cubers and set personal records"
             />
             <SellingPoint
               bg="bg-si-green"

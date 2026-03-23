@@ -100,16 +100,15 @@ function CompItem({ comp, index }: { comp: HeroComp; index: number }) {
         <div className="flex items-center gap-2 text-sm text-base-content/50">
           <span className="truncate">
             <FontAwesomeIcon icon={faLocationArrow} className="w-2.5 text-primary mr-2" />
-            <span className="font-bold text-primary mr-2">{city}</span>
-            &middot;
-            &nbsp;
+            <span className="font-bold text-primary">{city}</span>
+            <span className="mx-2">&middot;</span>
             {date}
           </span>
         </div>
         <div className="flex items-center gap-2">
           <p className="font-bold text-lg mt-0.5 truncate">{compName}</p>
           {icon && (
-            <FontAwesomeIcon icon={icon} className="text-xl ml-auto my-auto text-si-gold-light" />
+            <FontAwesomeIcon icon={icon} className="text-xl ml-auto mr-2 my-auto text-si-gold-light" />
           )}
         </div>
         <p className={`text-sm mt-0.5 ${reg.className}`}>{reg.text}</p>
