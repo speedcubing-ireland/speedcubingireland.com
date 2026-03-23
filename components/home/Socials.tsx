@@ -7,7 +7,7 @@ function Socials() {
     <div className="bg-primary text-primary-content">
       <div className="max-w-7xl mx-auto py-12 lg:py-16 px-8 lg:flex lg:items-center">
         <div className="lg:w-0 lg:flex-1">
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl" id="newsletter-headline">
+          <h2 className="text-3xl font-black tracking-tight sm:text-4xl" id="newsletter-headline">
             Follow us on social media!
           </h2>
           <p className="mt-3 max-w-3xl text-lg leading-6">

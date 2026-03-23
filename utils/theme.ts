@@ -8,120 +8,12 @@ interface ThemeData {
 
 export const themeData: ThemeData[] = [
   {
-    name: 'light',
+    name: 'speedcubing',
     dark: false,
   },
   {
-    name: 'dark',
+    name: 'speedcubing-dark',
     dark: true,
-  },
-  {
-    name: 'cupcake',
-    dark: false,
-  },
-  {
-    name: 'bumblebee',
-    dark: false,
-  },
-  {
-    name: 'emerald',
-    dark: false,
-  },
-  {
-    name: 'corporate',
-    dark: false,
-  },
-  {
-    name: 'synthwave',
-    dark: true,
-  },
-  {
-    name: 'retro',
-    dark: false,
-  },
-  {
-    name: 'cyberpunk',
-    dark: false,
-  },
-  {
-    name: 'valentine',
-    dark: false,
-  },
-  {
-    name: 'halloween',
-    dark: true,
-  },
-  {
-    name: 'garden',
-    dark: false,
-  },
-  {
-    name: 'forest',
-    dark: true,
-  },
-  {
-    name: 'aqua',
-    dark: true,
-  },
-  {
-    name: 'lofi',
-    dark: false,
-  },
-  {
-    name: 'pastel',
-    dark: false,
-  },
-  {
-    name: 'fantasy',
-    dark: false,
-  },
-  {
-    name: 'wireframe',
-    dark: false,
-  },
-  {
-    name: 'black',
-    dark: true,
-  },
-  {
-    name: 'luxury',
-    dark: true,
-  },
-  {
-    name: 'dracula',
-    dark: true,
-  },
-  {
-    name: 'cmyk',
-    dark: false,
-  },
-  {
-    name: 'autumn',
-    dark: false,
-  },
-  {
-    name: 'business',
-    dark: true,
-  },
-  {
-    name: 'acid',
-    dark: false,
-  },
-  {
-    name: 'lemonade',
-    dark: false,
-  },
-  {
-    name: 'night',
-    dark: true,
-  },
-  {
-    name: 'coffee',
-    dark: true,
-  },
-  {
-    name: 'winter',
-    dark: false,
   },
 ];
 

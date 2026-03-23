@@ -1,39 +1,45 @@
 import { faPeopleGroup, faStopwatch, faTrophy } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-function Stat(title: string, value: string, color: string, icon: any) {
-  return (
-    <div key={title} className="pt-4">
-      <p className={`font-extrabold gap-2  ${color}`}>
-        <span className="align-middle text-3xl">
-          <FontAwesomeIcon icon={icon} className="pt-1.5" />
-        </span>
-        {' '}
-        <span className="align-middle text-5xl">{value}</span>
-      </p>
-      <p className="text-lg font-bold">{title}</p>
-    </div>
-  );
-}
+const stats = [
+  {
+    title: 'Competitors',
+    value: '1,750+',
+    color: 'text-cube-green',
+    icon: faPeopleGroup,
+  },
+  {
+    title: 'Solves',
+    value: '270K+',
+    color: 'text-cube-blue',
+    icon: faStopwatch,
+  },
+  {
+    title: 'Competitions',
+    value: '85+',
+    color: 'text-cube-red',
+    icon: faTrophy,
+  },
+];
 
 function Stats() {
-  // See  ../../docs/STATS.MD to work out how to get those stats
-  const stats = [
-    {
-      title: 'Competitors', value: '1,750+', color: 'text-secondary', icon: faPeopleGroup,
-    },
-    {
-      title: 'Solves', value: '270,000+', color: 'text-primary', icon: faStopwatch,
-    },
-    {
-      title: 'Competitions', value: '85+', color: 'text-secondary', icon: faTrophy,
-    },
-  ];
-
   return (
     <div className="bg-base-200">
-      <div className="columns-1 md:columns-3 text-center max-w-4xl m-auto pt-4 pb-6">
-        {stats.map((stat) => (Stat(stat.title, stat.value, stat.color, stat.icon)))}
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 py-4 sm:py-10 lg:py-12">
+        <div className="grid grid-cols-1 gap-8 sm:gap-0 sm:grid-cols-3 text-center">
+          {stats.map((stat) => (
+            <div key={stat.title}>
+              <p className={`font-extrabold gap-2  ${stat.color}`}>
+                <span className="align-middle text-3xl">
+                  <FontAwesomeIcon icon={stat.icon} className="pt-1.5" />
+                </span>
+                {' '}
+                <span className="align-middle text-3xl">{stat.value}</span>
+              </p>
+              <p className="text-lg font-bold">{stat.title}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

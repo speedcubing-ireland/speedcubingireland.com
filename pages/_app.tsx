@@ -42,7 +42,7 @@ export default function App({ Component, pageProps }: AppProps) {
       attribute="data-theme"
       themes={themes}
       disableTransitionOnChange
-      defaultTheme="emerald"
+      defaultTheme="speedcubing"
       enableSystem={false}
     >
       <ThemeController />

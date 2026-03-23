@@ -3,7 +3,7 @@ function Redirecting() {
     <div className="hero min-h-screen bg-base-200">
       <div className="hero-content text-center">
         <div className="max-w-md">
-          <h1 className="text-5xl font-bold">Redirecting</h1>
+          <h1 className="text-5xl font-black">Redirecting</h1>
           <progress className="progress w-full px-5" />
         </div>
       </div>

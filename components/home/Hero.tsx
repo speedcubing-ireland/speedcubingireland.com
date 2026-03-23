@@ -1,5 +1,5 @@
 import {
-  faCaretRight, faLocationArrow, faPeopleGroup, faTrophy,
+  faArrowRight, faLocationArrow, faPeopleGroup, faTrophy,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
@@ -15,39 +15,6 @@ export type HeroComp = {
   city: string;
 } & ({ id: string, series: false } | { series: true });
 
-interface ItemProps {
-  title: JSX.Element
-  name: string
-  desc: JSX.Element
-  url: string
-  icon?: any
-}
-
-function CardItem({
-  title,
-  name,
-  desc,
-  url,
-  icon,
-}: ItemProps) {
-  return (
-    <Link href={url} className="stat px-4 hover:bg-base-200">
-      <div className="stat-title opacity-100">{title}</div>
-      <div className="stat-value text-lg">{name}</div>
-      <div className="stat-desc opacity-100">{desc}</div>
-      {icon && <div className="stat-figure"><FontAwesomeIcon icon={icon} className="text-accent" /></div>}
-    </Link>
-  );
-}
-
-function Card({ children }: { children: JSX.Element | JSX.Element[] }) {
-  return (
-    <div className="stats stats-vertical max-w-sm w-full shadow-xl">
-      {children}
-    </div>
-  );
-}
-
 interface HeroProps {
   comps: HeroComp[];
 }
@@ -56,7 +23,6 @@ export function formatCompDates(comp: HeroComp): string {
   const startDate = new Date(comp.start_date);
   const endDate = new Date(comp.end_date);
 
-  // Extreme cases - Dec 31, 2022 - Jan 1, 2023
   const startYear = startDate.getFullYear();
   const startMonth = startDate.toLocaleString('default', { month: 'short' });
   const startDay = startDate.getDate();
@@ -70,7 +36,7 @@ export function formatCompDates(comp: HeroComp): string {
   if (startDay === endDay && startMonth === endMonth && startYear === endYear) return `${date}, ${startYear}`;
 
   if (startYear !== endYear) date += `, ${startYear}`;
-  date += comp.series ? ' & ' : ' - ';
+  date += comp.series ? ' & ' : ' – ';
 
   if (startMonth !== endMonth || startYear !== endYear) date += `${endMonth} `;
   date += `${endDay}, ${endYear}`;
@@ -78,112 +44,117 @@ export function formatCompDates(comp: HeroComp): string {
   return date;
 }
 
-function getCardTitle(comp: HeroComp) {
+function getRegStatus(comp: HeroComp) {
+  const now = new Date();
+  if (now > new Date(comp.registration_close)) {
+    return { text: 'Registration closed', className: 'text-base-content/40' };
+  }
+
+  const diff = new Date(comp.registration_open).getTime() - now.getTime();
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((diff / 1000 / 60) % 60);
+
+  let text: string;
+  if (days > 0) {
+    text = `Registration opens in ${days} days`;
+  } else if (hours > 0) {
+    text = `Registration opens in ${hours} hours`;
+  } else if (minutes > 0) {
+    text = `Registration opens in ${minutes} minutes`;
+  } else if (diff > 0) {
+    text = 'Registration opens soon';
+  } else {
+    text = 'Registration open!';
+  }
+  return { text, className: 'text-primary' };
+}
+
+const ACCENT_COLORS = [
+  'bg-cube-red',
+  'bg-cube-blue',
+  'bg-cube-orange',
+  'bg-cube-yellow',
+];
+
+function CompItem({ comp, index }: { comp: HeroComp; index: number }) {
   const date = formatCompDates(comp);
   const city = (comp.city.split(',').shift()?.trim() ?? comp.city).replace('County', '').trim();
+  const compName = (comp.name.slice(0, -4) + (comp.series ? ' (Series)' : '')).replace('Kilkenny Cats', 'Cats');
+  const url = comp.series ? IRISH_COMPS_URL : `${WCA_URL}/competitions/${(comp as any).id}`;
+  const reg = getRegStatus(comp);
+
+  let icon: IconProp | undefined;
+  if (comp.series) icon = faPeopleGroup;
+  if (comp.name.includes('Championship')) icon = faTrophy;
+
+  const accent = ACCENT_COLORS[index % ACCENT_COLORS.length];
 
   return (
-    <>
-      <FontAwesomeIcon icon={faLocationArrow} className="text-primary" />
-      &nbsp;
-      <span className="font-bold text-primary">{city}</span>
-      &nbsp;
-      {date}
-    </>
+    <Link
+      href={url}
+      className={`flex items-start gap-4 p-4 border border-base-content/20 hover:border-base-content/20 hover:bg-base-200`}
+    >
+      <div className={`w-1 self-stretch rounded-full shrink-0 ${accent}`} />
+      <div className="flex-1 min-w-0">
+        <div className="flex items-center gap-2 text-sm text-base-content/50">
+          <FontAwesomeIcon icon={faLocationArrow} className="w-2.5 text-primary" />
+          <span className="font-bold text-primary">{city}</span>
+          <span>&middot;</span>
+          <span>{date}</span>
+        </div>
+        <p className="font-bold text-lg mt-0.5 truncate">{compName}</p>
+        <p className={`text-sm mt-0.5 ${reg.className}`}>{reg.text}</p>
+      </div>
+      {icon && (
+        <FontAwesomeIcon icon={icon} className="text-xl w-16 h-16 my-auto text-si-gold-light" />
+      )}
+    </Link>
   );
 }
 
-function getCardDesc(comp: HeroComp) {
-  // Current date
-  const now = new Date();
-  let regText: string;
-  let regClass: string;
-  if (now > new Date(comp.registration_close)) {
-    regText = 'Registration is closed';
-    regClass = '';
-  } else {
-    // get time until registration opens like opens in 2 hours or opens in 3 weeks
-    const diff = new Date(comp.registration_open).getTime() - now.getTime();
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-    const minutes = Math.floor((diff / 1000 / 60) % 60);
-    const seconds = Math.floor((diff / 1000) % 60);
-    regClass = 'text-primary';
-    if (days > 0) {
-      regText = `Registration opens in ${days} days`;
-    } else if (hours > 0) {
-      regText = `Registration opens in ${hours} hours`;
-    } else if (minutes > 0) {
-      regText = `Registration opens in ${minutes} minutes`;
-    } else if (seconds > 0) {
-      regText = `Registration opens in ${seconds} seconds`;
-    } else {
-      regText = 'Registration is now open!';
-    }
-  }
-  return <span className={regClass}>{regText}</span>;
-}
-
-function HeroCard({ comps }: HeroProps) {
-  if (comps.length === 0) {
-    return (
-      <Card>
-        <CardItem
-          title={<span className="font-bold text-primary">No upcoming competitions</span>}
-          name="Check back later!"
-          desc={<span className="text-secondary">No competitions are currently scheduled</span>}
-          url={IRISH_COMPS_URL}
-        />
-      </Card>
-    );
-  }
-
-  const compStat = (comp: HeroComp) => {
-    const compName = (comp.name.slice(0, -4) + (comp.series ? '(Series)' : '')).replace('Kilkenny Cats', 'Cats');
-
-    let icon: IconProp | undefined;
-    if (comp.series) icon = faPeopleGroup;
-    if (comp.name.includes('Championship')) icon = faTrophy;
-
-    return (
-      <CardItem
-        key={comp.name}
-        title={getCardTitle(comp)}
-        name={compName}
-        desc={getCardDesc(comp)}
-        url={comp.series ? IRISH_COMPS_URL : `${WCA_URL}/competitions/${comp.id}`}
-        icon={icon}
-      />
-    );
-  };
-
+function EmptyState() {
   return (
-    <Card>
-      {comps.map((c) => compStat(c))}
-    </Card>
+    <div className="text-center py-8 text-base-content/40">
+      <p className="font-bold text-lg">No upcoming competitions</p>
+      <p className="text-sm mt-1">Check back later for new events!</p>
+    </div>
   );
 }
 
 function Hero({ comps }: HeroProps) {
   return (
-    <div
-      className="hero bg-gradient-to-br from-primary to-secondary"
-    >
-      <div className="hero-content flex-col lg:flex-row-reverse py-10 gap-12">
-        <div className="text-center text-primary-content lg:text-left">
-          <h1 className="text-5xl font-bold gap-2">Upcoming Competitions</h1>
-          <p className="py-6 text-lg text-left">
-            Welcome to Speedcubing Ireland, the official WCA regional organization
-            for promoting and supporting the exciting world of speedcubing in Ireland!
-
-            Check out our list of upcoming competitions to get involved and join the fun!
-          </p>
-          <Link className="btn gap-2" href={IRISH_COMPS_URL}>
-            See More!
-            <FontAwesomeIcon icon={faCaretRight} />
-          </Link>
+    <div className="bg-base-100">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+        <div className="flex flex-col lg:flex-row gap-10 lg:gap-16">
+          <div className="lg:w-2/5 lg:py-4">
+            <h2 className="text-4xl sm:text-5xl font-black leading-tight">
+              Upcoming
+              <br />
+              <span className="text-primary">Competitions</span>
+            </h2>
+            <p className="mt-4 text-base-content/60 leading-relaxed">
+              Welcome to Speedcubing Ireland, the official WCA regional organization
+              for promoting and supporting the exciting world of speedcubing in Ireland!
+              Check out our list of upcoming competitions to get involved and join the fun!
+            </p>
+            <Link className="btn btn-primary mt-6 gap-2" href={IRISH_COMPS_URL}>
+              See All Competitions
+              <FontAwesomeIcon icon={faArrowRight} className="w-3" />
+            </Link>
+          </div>
+          <div className="lg:w-3/5">
+            {comps.length === 0 ? (
+              <EmptyState />
+            ) : (
+              <div className="flex flex-col gap-3">
+                {comps.map((comp, i) => (
+                  <CompItem key={comp.name} comp={comp} index={i} />
+                ))}
+              </div>
+            )}
+          </div>
         </div>
-        <HeroCard comps={comps} />
       </div>
     </div>
   );

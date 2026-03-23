@@ -4,8 +4,6 @@ import SILogo from '../../public/logos/speedcubing-ireland-logo.svg';
 import SILogoDark from '../../public/logos/speedcubing-ireland-logo-dark.svg';
 import WCALogo from '../../public/logos/wca-logo.svg';
 import WCALogoDark from '../../public/logos/wca-logo-dark.svg';
-// import UTwistLogo from '../../public/logos/utwistcubes-logo.png';
-// import UTwistLogoDark from '../../public/logos/utwistcubes-logo-dark.png';
 
 import { useLightDarkOption } from '../../utils/theme';
 import { WCA_URL } from '../../utils/constants';
@@ -17,22 +15,12 @@ interface SponsorData {
   link: string;
 }
 
-// Disable sponsor logos for now
-// const sponsors: SponsorData[] = [
-//   {
-//     name: 'UTwistCubes',
-//     lightLogo: UTwistLogo,
-//     darkLogo: UTwistLogoDark,
-//     link: 'https://www.utwistcubes.com/',
-//   },
-// ];
-
 const sponsors: SponsorData[] = [];
 
 function Sponsor({ data, dark }: { data: SponsorData, dark: boolean }) {
   const imgSrc = dark ? data.darkLogo : data.lightLogo;
   return (
-    <Link href={data.link} className="btn btn-ghost">
+    <Link href={data.link} className="btn btn-ghost h-auto p-3">
       <Image
         priority
         src={imgSrc}
@@ -45,42 +33,45 @@ function Sponsor({ data, dark }: { data: SponsorData, dark: boolean }) {
 
 function AllSponsors({ dark }: { dark: boolean }) {
   let tagline = '';
-
   if (sponsors.length > 0) {
     tagline = 'Speedcubing Ireland is proudly supported by our sponsor';
   }
-
   if (sponsors.length > 1) tagline += 's';
+
   return (
     <>
-      <h1 className="text-3xl font-bold pb-4 pt-2">{tagline}</h1>
-      {sponsors.map((sponsor) => (<Sponsor key={sponsor.name} data={sponsor} dark={dark} />))}
+      <h3 className="text-sm font-bold uppercase tracking-wider text-base-content/40 mb-4">
+        {tagline}
+      </h3>
+      <div className="flex items-center justify-center gap-6 flex-wrap">
+        {sponsors.map((sponsor) => (
+          <Sponsor key={sponsor.name} data={sponsor} dark={dark} />
+        ))}
+      </div>
     </>
   );
 }
 
 function SelfSponsor({ dark }: { dark: boolean }) {
   return (
-    <>
-      <Link href="/" className="btn btn-ghost h-full p-2 mx-4" aria-label="Speedcubing Ireland Logo">
-        {dark ? <SILogoDark className="h-16" /> : <SILogo className="h-16" />}
+    <div className="flex items-center justify-center gap-6 flex-wrap">
+      <Link href="/" className="btn btn-ghost h-auto p-3" aria-label="Speedcubing Ireland Logo">
+        {dark ? <SILogoDark className="h-14" /> : <SILogo className="h-14" />}
       </Link>
-      <Link href={WCA_URL} className="btn btn-ghost h-full p-2 mx-4" aria-label="WCA Logo">
-        {dark ? <WCALogoDark className="h-16" /> : <WCALogo className="h-16" />}
+      <Link href={WCA_URL} className="btn btn-ghost h-auto p-3" aria-label="WCA Logo">
+        {dark ? <WCALogoDark className="h-14" /> : <WCALogo className="h-14" />}
       </Link>
-    </>
+    </div>
   );
 }
 
 function Sponsors() {
   const dark = useLightDarkOption(false, true);
   return (
-    <div className="bg-base-200 hero">
-      <div className="hero-content text-center">
-        <div className="this-is-here-to-make-layout-work">
-          {sponsors.length > 0 && <AllSponsors dark={dark} />}
-          {sponsors.length === 0 && <SelfSponsor dark={dark} />}
-        </div>
+    <div className="bg-base-200 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center">
+        {sponsors.length > 0 && <AllSponsors dark={dark} />}
+        {sponsors.length === 0 && <SelfSponsor dark={dark} />}
       </div>
     </div>
   );
