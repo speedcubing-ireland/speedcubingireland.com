@@ -7,8 +7,8 @@ import { getWCALiveCompetitionId } from '../../utils/wca-live';
 async function getRedirectUrl(): Promise<string> {
   const currentComp = await getCurrentCompetition();
 
-  if (currentComp?.id === "ReLaoistheCubers2026") {
-    return "https://www.worldcubeassociation.org/competitions/ReLaoistheCubers2026/live"
+  if (currentComp?.id === 'ReLaoistheCubers2026') {
+    return 'https://www.worldcubeassociation.org/competitions/ReLaoistheCubers2026/live';
   }
 
   let redirect = 'https://live.worldcubeassociation.org/';
