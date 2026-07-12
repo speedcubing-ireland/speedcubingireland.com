@@ -53,7 +53,7 @@ function IrishChampionshipHero() {
         <p
           className="font-sans font-bold text-black text-[10px] sm:text-xs uppercase tracking-[0.3em]"
         >
-          Registration Open Now &middot; New Competitors Welcome
+          Registration Closed &middot; Open to Spectators!
         </p>
       </div>
 
