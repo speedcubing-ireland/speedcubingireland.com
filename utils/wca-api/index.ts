@@ -8,6 +8,13 @@ function getCurrentDate() {
   return new Date();
 }
 
+// WCA dates (start_date/end_date) are date-only strings parsed as UTC midnight,
+// so "today" must also be computed in UTC to avoid off-by-one errors in other timezones.
+function getTodayUTC(): Date {
+  const now = getCurrentDate();
+  return new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()));
+}
+
 export function dateInDays(days: number): Date {
   return new Date(getCurrentDate().getTime() + days * 24 * 60 * 60 * 1000);
 }
@@ -63,8 +70,7 @@ export async function getCompsFromNow(): Promise<Competition[]> {
 
   const niComps = ukComps.filter((comp) => isNorthernIrelandCity(comp.city));
 
-  const today = getCurrentDate();
-  today.setHours(0, 0, 0, 0);
+  const today = getTodayUTC();
 
   return [...comps, ...niComps].filter((comp) => {
     if (!comp) return false;
@@ -74,8 +80,7 @@ export async function getCompsFromNow(): Promise<Competition[]> {
 }
 
 export async function getCurrentCompetition(): Promise<Competition | undefined> {
-  const today = getCurrentDate();
-  today.setHours(0, 0, 0, 0);
+  const today = getTodayUTC();
 
   const comps = await getCompsFromNow();
 
