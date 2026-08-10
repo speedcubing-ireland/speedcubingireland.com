@@ -24,6 +24,18 @@ export function isThemeDark(theme: string | undefined) {
   return data && data.dark;
 }
 
+const TYPING_TAG_NAMES = ['INPUT', 'TEXTAREA', 'SELECT'];
+
+// The theme shortcut is a bare "T" keypress, so it must not fire while the user
+// is typing into a form control (e.g. the contact form).
+export function isTypingTarget(target: EventTarget | null): boolean {
+  const element = target as HTMLElement | null;
+  if (!element) return false;
+  if (element.isContentEditable) return true;
+
+  return TYPING_TAG_NAMES.includes(element.tagName);
+}
+
 export function useLightDarkOption<T>(light: T, dark: T): T {
   const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);

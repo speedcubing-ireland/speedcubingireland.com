@@ -6,7 +6,7 @@ import { ThemeProvider, useTheme } from 'next-themes';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { useEffect } from 'react';
 import { GoogleAnalytics } from 'nextjs-google-analytics';
-import { themeData } from '../utils/theme';
+import { isTypingTarget, themeData } from '../utils/theme';
 
 config.autoAddCss = false;
 
@@ -21,6 +21,8 @@ function ThemeController() {
     const listener = (e: KeyboardEvent) => {
       if (!theme) return;
       if (e.key.toUpperCase() !== 'T') return;
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      if (isTypingTarget(e.target)) return;
       const increment = e.shiftKey ? -1 : 1;
 
       const themeIdx = themes.indexOf(theme);

@@ -1,5 +1,9 @@
 import { describe, it, expect } from 'vitest';
-import { isThemeDark, themeData } from '../../utils/theme';
+import { isThemeDark, isTypingTarget, themeData } from '../../utils/theme';
+
+const asTarget = (tagName: string, isContentEditable = false) => (
+  { tagName, isContentEditable } as unknown as EventTarget
+);
 
 describe('isThemeDark', () => {
   it('returns true for "dark" theme', () => {
@@ -20,6 +24,24 @@ describe('isThemeDark', () => {
 
   it('returns falsy for unknown theme', () => {
     expect(isThemeDark('nonexistent-theme')).toBeFalsy();
+  });
+});
+
+describe('isTypingTarget', () => {
+  it.each(['INPUT', 'TEXTAREA', 'SELECT'])('returns true for a <%s> target', (tagName) => {
+    expect(isTypingTarget(asTarget(tagName))).toBe(true);
+  });
+
+  it('returns true for a contenteditable element', () => {
+    expect(isTypingTarget(asTarget('DIV', true))).toBe(true);
+  });
+
+  it.each(['DIV', 'BUTTON', 'BODY', 'A'])('returns false for a <%s> target', (tagName) => {
+    expect(isTypingTarget(asTarget(tagName))).toBe(false);
+  });
+
+  it('returns false for a null target', () => {
+    expect(isTypingTarget(null)).toBe(false);
   });
 });
 
