@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */ // daisyUI uses tabIndex
 import {
-  faAward, faBars, faBolt, faCircleInfo, faHome, faMoon, faSun,
+  faAward, faBars, faBolt, faCircleInfo, faEnvelope, faHome, faMoon, faSun,
 } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -63,6 +63,11 @@ function Navbar() {
       text: 'About',
       icon: faCircleInfo,
       url: '/posts/about',
+    },
+    {
+      text: 'Contact Us',
+      icon: faEnvelope,
+      url: '/contact',
     },
   ].filter((item) => router.pathname !== item.url);
 
