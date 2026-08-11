@@ -6,7 +6,7 @@ import Link from 'next/link';
 import Obfuscate from 'react-obfuscate';
 import Layout from '../components/layout/Layout';
 import { getCompsFromNow } from '../utils/wca-api';
-import { CURRENT_COMP_REVALIDATE_TIME } from '../utils/constants';
+import { CURRENT_COMP_REVALIDATE_TIME, FACEBOOK_URL, INSTAGRAM_URL } from '../utils/constants';
 import {
   CONTACT_REASONS,
   CONTACT_OTHER_COMPETITION,
@@ -125,9 +125,13 @@ export default function Contact({
         <div className="prose max-w-prose mx-auto p-8 pb-0">
           <h1>Contact Us</h1>
           <p>
-            Have a question, want to organise a competition, or need help with a
-            registration? Fill in the form below and we&apos;ll get back to you.
-            We&apos;re all volunteers, so please allow a few days for a reply.
+            Have a look at our
+            {' '}
+            <Link href="/faq">FAQ</Link>
+            {' '}
+            — your question may already be answered there. Otherwise, fill in
+            the form below and we&apos;ll get back to you. We&apos;re all
+            volunteers, so please allow a few days for a reply.
           </p>
         </div>
 
@@ -323,14 +327,14 @@ export default function Contact({
           <div className="flex justify-center gap-2 mt-2">
             <Link
               className="btn btn-ghost gap-2"
-              href="https://www.facebook.com/SpeedcubingIreland"
+              href={FACEBOOK_URL}
             >
               <FontAwesomeIcon icon={faFacebook} className="text-2xl" />
               Facebook
             </Link>
             <Link
               className="btn btn-ghost gap-2"
-              href="https://www.instagram.com/speedcubingireland/"
+              href={INSTAGRAM_URL}
             >
               <FontAwesomeIcon icon={faInstagram} className="text-2xl" />
               Instagram

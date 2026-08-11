@@ -3,6 +3,7 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import WhiteLogo from '../../public/logos/speedcubing-ireland-logo-outline.svg';
+import { DISCORD_URL, FACEBOOK_URL, INSTAGRAM_URL } from '../../utils/constants';
 
 function Footer() {
   return (
@@ -24,9 +25,9 @@ function Footer() {
       <div>
         <span className="footer-title">Social</span>
         <div className="grid grid-flow-col gap-4 text-2xl">
-          <a aria-label="Facebook link" href="https://www.facebook.com/speedcubingireland/"><FontAwesomeIcon icon={faFacebook} /></a>
-          <a aria-label="Instagram link" href="https://www.instagram.com/speedcubingireland/"><FontAwesomeIcon icon={faInstagram} /></a>
-          <a aria-label="Discord link" href="https://discord.gg/FCdnfetK7c"><FontAwesomeIcon icon={faDiscord} /></a>
+          <a aria-label="Facebook link" href={FACEBOOK_URL}><FontAwesomeIcon icon={faFacebook} /></a>
+          <a aria-label="Instagram link" href={INSTAGRAM_URL}><FontAwesomeIcon icon={faInstagram} /></a>
+          <a aria-label="Discord link" href={DISCORD_URL}><FontAwesomeIcon icon={faDiscord} /></a>
         </div>
       </div>
     </footer>

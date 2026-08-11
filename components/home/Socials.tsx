@@ -1,6 +1,7 @@
 import { faDiscord, faFacebook, faInstagram } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
+import { DISCORD_URL, FACEBOOK_URL, INSTAGRAM_URL } from '../../utils/constants';
 
 function Socials() {
   return (
@@ -17,13 +18,13 @@ function Socials() {
           </p>
         </div>
         <div className="mt-8 lg:mt-0 lg:ml-8">
-          <Link className="btn btn-ghost text-5xl" href="https://www.facebook.com/SpeedcubingIreland" aria-label="Facebook">
+          <Link className="btn btn-ghost text-5xl" href={FACEBOOK_URL} aria-label="Facebook">
             <FontAwesomeIcon icon={faFacebook} />
           </Link>
-          <Link className="btn btn-ghost text-5xl" href="https://www.instagram.com/speedcubingireland/" aria-label="Instagram">
+          <Link className="btn btn-ghost text-5xl" href={INSTAGRAM_URL} aria-label="Instagram">
             <FontAwesomeIcon icon={faInstagram} />
           </Link>
-          <Link className="btn btn-ghost text-5xl" href="https://discord.gg/FCdnfetK7c" aria-label="Discord">
+          <Link className="btn btn-ghost text-5xl" href={DISCORD_URL} aria-label="Discord">
             <FontAwesomeIcon icon={faDiscord} />
           </Link>
         </div>

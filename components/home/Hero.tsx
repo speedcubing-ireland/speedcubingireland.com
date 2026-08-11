@@ -19,17 +19,24 @@ interface HeroProps {
   comps: HeroComp[];
 }
 
+const SHORT_MONTHS = [
+  'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
+];
+
 export function formatCompDates(comp: HeroComp): string {
   const startDate = new Date(comp.start_date);
   const endDate = new Date(comp.end_date);
 
-  const startYear = startDate.getFullYear();
-  const startMonth = startDate.toLocaleString('default', { month: 'short' });
-  const startDay = startDate.getDate();
+  // UTC getters: comp dates are plain YYYY-MM-DD, so they parse as UTC midnight.
+  // Reading them locally would shift the day back in timezones behind UTC, which
+  // would also make the server and client render different dates.
+  const startYear = startDate.getUTCFullYear();
+  const startMonth = SHORT_MONTHS[startDate.getUTCMonth()];
+  const startDay = startDate.getUTCDate();
 
-  const endYear = endDate.getFullYear();
-  const endMonth = endDate.toLocaleString('default', { month: 'short' });
-  const endDay = endDate.getDate();
+  const endYear = endDate.getUTCFullYear();
+  const endMonth = SHORT_MONTHS[endDate.getUTCMonth()];
+  const endDay = endDate.getUTCDate();
 
   let date = `${startMonth} ${startDay}`;
 
