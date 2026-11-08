@@ -50,7 +50,7 @@ function Navbar() {
       url: '/',
     },
     {
-      text: 'WCA Live',
+      text: 'Live Results',
       icon: faBolt,
       url: '/redirects/wca-live',
     },

@@ -6,7 +6,6 @@ export const WCA_API_URL = `${WCA_URL}/api/v0`;
 export const IRISH_COMPS_URL = `${WCA_URL}/competitions?region=Ireland&show_registration_status=on`;
 
 export const WCA_LIVE_URL = 'https://live.worldcubeassociation.org';
-export const WCA_LIVE_API_URL = `${WCA_LIVE_URL}/api`;
 export const WCA_SIGNUP_URL = `${WCA_URL}/users/sign_up`;
 export const WCA_RESULTS_URL = `${WCA_URL}/results/rankings`;
 export const SHOPIFY_STORE_URL = 'https://speedcubingireland-merch.myshopify.com';

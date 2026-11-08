@@ -5,7 +5,6 @@ import {
   COMPETITOR_GUIDE_VIDEO_URL,
   DISCORD_URL,
   FACEBOOK_URL,
-  WCA_LIVE_URL,
   WCA_RESULTS_URL,
   WCA_SIGNUP_URL,
 } from '../../utils/constants';
@@ -218,7 +217,7 @@ export const FAQ_SECTIONS: FaqSection[] = [
           <p>
             Competitor times will be uploaded throughout the competition onto
             {' '}
-            <Link href={WCA_LIVE_URL}>WCA Live</Link>
+            <Link href="/redirects/wca-live">WCA Live Results</Link>
             . Please allow up to an hour from finishing your solves to them
             being uploaded. After the competition has finished and all
             results are verified, they are added to the
