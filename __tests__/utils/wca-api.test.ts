@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import { dateInDays, formatDate, searchCompetitions, getCompsFromNow, getCurrentCompetition } from '../../utils/wca-api';
+import { dateInDays, formatDate, searchCompetitions, getCompsFromNow, getCurrentCompetition, getLinkActivationDate } from '../../utils/wca-api';
 import { Competition } from '../../utils/wca-api/types';
 
 describe('dateInDays', () => {
@@ -328,6 +328,85 @@ describe('getCurrentCompetition', () => {
 
     expect(result).toBeDefined();
     expect(result?.id).toBe('OngoingComp');
+  });
+});
+
+describe('getLinkActivationDate', () => {
+  // Week of Mon 2024-03-18 to Sun 2024-03-24
+  it.each([
+    ['2024-03-23', '2024-03-19'], // Saturday start: 4 days before (Tuesday)
+    ['2024-03-24', '2024-03-20'], // Sunday start: 4 days before (Wednesday)
+    ['2024-03-22', '2024-03-18'], // Friday start: 4 days before is Monday
+    ['2024-03-21', '2024-03-18'], // Thursday start: capped at Monday
+    ['2024-03-18', '2024-03-18'], // Monday start: capped at Monday (same day)
+  ])('for a comp starting %s returns %s', (start, expected) => {
+    expect(formatDate(getLinkActivationDate(start))).toBe(expected);
+  });
+});
+
+describe('getCurrentCompetition before the competition starts', () => {
+  beforeEach(() => {
+    vi.stubGlobal('fetch', vi.fn());
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+    vi.unstubAllGlobals();
+  });
+
+  function mockIeComps(comps: Competition[]) {
+    (fetch as ReturnType<typeof vi.fn>).mockImplementation((url: string) => Promise.resolve({
+      ok: true,
+      json: () => Promise.resolve(url.includes('country_iso2=IE') ? comps : []),
+    }));
+  }
+
+  async function currentCompOn(date: string) {
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date(`${date}T12:00:00Z`));
+    return getCurrentCompetition();
+  }
+
+  const thisWeekend = createMockCompetition({ id: 'ThisWeekend', start_date: '2024-03-23', end_date: '2024-03-24' });
+  const nextWeekend = createMockCompetition({ id: 'NextWeekend', start_date: '2024-03-30', end_date: '2024-03-31' });
+
+  it('returns undefined more than 4 days before a Saturday start', async () => {
+    mockIeComps([thisWeekend]);
+    expect(await currentCompOn('2024-03-18')).toBeUndefined();
+  });
+
+  it('returns the upcoming comp 4 days before a Saturday start', async () => {
+    mockIeComps([thisWeekend]);
+    expect((await currentCompOn('2024-03-19'))?.id).toBe('ThisWeekend');
+  });
+
+  it('does not activate before the Monday of the start week', async () => {
+    const thursday = createMockCompetition({ id: 'Thursday', start_date: '2024-03-21', end_date: '2024-03-21' });
+    mockIeComps([thursday]);
+    expect(await currentCompOn('2024-03-17')).toBeUndefined();
+    expect((await currentCompOn('2024-03-18'))?.id).toBe('Thursday');
+  });
+
+  it('keeps pointing at a running comp when the next one is close', async () => {
+    const sunday = createMockCompetition({ id: 'Sunday', start_date: '2024-03-24', end_date: '2024-03-24' });
+    const wednesday = createMockCompetition({ id: 'Wednesday', start_date: '2024-03-27', end_date: '2024-03-27' });
+    mockIeComps([sunday, wednesday]);
+    expect((await currentCompOn('2024-03-24'))?.id).toBe('Sunday');
+  });
+
+  it('switches to next weekend only once this weekend is over and its window opens', async () => {
+    mockIeComps([thisWeekend, nextWeekend]);
+    expect((await currentCompOn('2024-03-21'))?.id).toBe('ThisWeekend');
+    expect((await currentCompOn('2024-03-24'))?.id).toBe('ThisWeekend');
+    expect(await currentCompOn('2024-03-25')).toBeUndefined();
+    expect((await currentCompOn('2024-03-26'))?.id).toBe('NextWeekend');
+  });
+
+  it('picks the soonest upcoming comp when several are active', async () => {
+    const saturday = createMockCompetition({ id: 'Saturday', start_date: '2024-03-23', end_date: '2024-03-23' });
+    const sunday = createMockCompetition({ id: 'Sunday', start_date: '2024-03-24', end_date: '2024-03-24' });
+    mockIeComps([sunday, saturday]);
+    expect((await currentCompOn('2024-03-21'))?.id).toBe('Saturday');
   });
 });
 

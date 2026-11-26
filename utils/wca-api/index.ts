@@ -79,11 +79,35 @@ export async function getCompsFromNow(): Promise<Competition[]> {
   }).sort((a, b) => Date.parse(b.start_date) - Date.parse(a.start_date));
 }
 
+const DAY_MS = 24 * 60 * 60 * 1000;
+const MAX_DAYS_BEFORE_START = 4;
+
+// The date from which the comp links point at an upcoming competition:
+// MAX_DAYS_BEFORE_START days before it starts, but never earlier than the
+// Monday of the week it starts in. This lets people who scan the printed QR
+// code a few days early land on the right competition, without a comp on the
+// following weekend taking over the links from this weekend's comp.
+export function getLinkActivationDate(startDate: string): Date {
+  const start = new Date(startDate);
+  const daysSinceMonday = (start.getUTCDay() + 6) % 7;
+  const monday = new Date(start.getTime() - daysSinceMonday * DAY_MS);
+  const earliest = new Date(start.getTime() - MAX_DAYS_BEFORE_START * DAY_MS);
+  return earliest > monday ? earliest : monday;
+}
+
+// The competition the comp links should point at: a running competition if
+// there is one, otherwise the soonest upcoming one whose links are active.
 export async function getCurrentCompetition(): Promise<Competition | undefined> {
   const today = getTodayUTC();
 
+  // Sorted by start_date descending, so the first match is the latest started.
   const comps = await getCompsFromNow();
 
-  const filtered = comps.filter((comp) => new Date(comp.start_date) <= today);
-  return filtered.length === 0 ? undefined : filtered[0];
+  const running = comps.find((comp) => new Date(comp.start_date) <= today);
+  if (running) return running;
+
+  const upcoming = comps
+    .filter((comp) => getLinkActivationDate(comp.start_date) <= today)
+    .sort((a, b) => Date.parse(a.start_date) - Date.parse(b.start_date));
+  return upcoming[0];
 }
